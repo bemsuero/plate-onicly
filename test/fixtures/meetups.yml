@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_one: MyString
+  user_two: MyString
+  meet_time: 2018-09-13 16:55:43
+  location: MyString
+
+two:
+  user_one: MyString
+  user_two: MyString
+  meet_time: 2018-09-13 16:55:43
+  location: MyString
