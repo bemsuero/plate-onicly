@@ -14,3 +14,26 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+require "curb"
+require "json"
+
+c = Curl::Easy.http_get("https://api.yelp.com/v3/businesses/search/api/token", "grant_type=client_credentials"
+    ) do |curl|
+      curl.headers['Authorization'] = 'Basic VyrZpVa6N0USPBDlVv5wiA'
+    end
+
+access_token = JSON.parse(c.body_str)["99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx"]
+
+{
+   "access_token": "NgCXRKc...MzYjw",
+   "token_type": "OAuth",
+   "expires_in": 3600,
+}
+
+//     Client ID
+// VyrZpVa6N0USPBDlVv5wiA
+//
+// API Key
+// 99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx
