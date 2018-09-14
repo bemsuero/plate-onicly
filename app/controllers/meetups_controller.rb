@@ -8,8 +8,7 @@ class MeetupsController < ApplicationController
   def new
     @meetup = Meetup.new
     location = params[:location]
-    # uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.7079996,-74.0067468&rankby=distance&type=restaurant&key=#{ENV['API_TOKEN']}") what we'll actually be using.
-    url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.7079996,-74.0067468&rankby=distance&type=restaurant&key=AIzaSyCk6eRqZiFhkKrymT8EUR21OZ4Jf2J9Xgs"
+    uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.7079996,-74.0067468&rankby=distance&type=restaurant&key=#{ENV['API_TOKEN']}")
     raw_data = HTTParty.get(url)
     # if @raw_data.is_a?(Net::HTTPSuccess)
     json = raw_data.parsed_response
