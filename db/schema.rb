@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_13_205543) do
+
+ActiveRecord::Schema.define(version: 2018_09_14_202736) do
+
+  create_table "interests", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_interests_on_name", unique: true
+  end
+
+  create_table "interests_users", id: false, force: :cascade do |t|
+    t.integer "interest_id", null: false
+    t.integer "user_id", null: false
+  end
+
+  create_table "meetup_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "meetups", force: :cascade do |t|
     t.string "user_one"
@@ -24,6 +42,8 @@ ActiveRecord::Schema.define(version: 2018_09_13_205543) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+
+    t.integer "age"
     t.integer "phone_number"
     t.string "email"
     t.string "password_digest"
@@ -31,6 +51,7 @@ ActiveRecord::Schema.define(version: 2018_09_13_205543) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
   end
 
 end

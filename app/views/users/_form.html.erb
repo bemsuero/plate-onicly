@@ -1,0 +1,31 @@
+<h1>Add a new user</h1>
+<%= form_for(@user) do |f| %>
+<label>Email:</label><br>
+<%= f.email_field :email, placeholder: "Email", required: true %><br><br>
+<label>First Name:</label><br>
+<%= f.text_field :first_name, placeholder: "First Name", required: true %><br><br>
+<label>Last Name:</label><br>
+<%= f.text_field :last_name, placeholder: "Last Name", required: true %><br><br>
+<label>Age:</label><br>
+<%= f.number_field :age, placeholder: "Age", min:18, max:120, required: true %><br><br>
+<label>Phone:</label><br>
+<%= f.telephone_field :phone_number, placeholder: "Phone Number",pattern: "[0-9]{10}", required: true %><br><br>
+
+<!-- Checkbox field begins -->
+<!-- <div class="field">
+  <%= f.label "Interests" %><br>
+  <%= f.collection_check_boxes :interests, Interest.all, :id, :name do |b| %>
+  <div class="collection-check-box">
+    <%= b.check_box %>
+    <%= b.label %>
+  </div>
+<% end %>
+</div><br> -->
+<!-- Checkbox field ends -->
+
+<label>Password:</label><br>
+<%= f.password_field :password, placeholder: "Password", required: true %><br><br>
+<label>Confirm Password:</label><br>
+<%= f.password_field :password_confirmation, placeholder: 'Confirm Password', required: true %><br><br>
+<%= f.submit "Register" %>
+<% end %>
