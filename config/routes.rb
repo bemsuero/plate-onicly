@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
+  root to: "users#new"
+
+  get 'sessions/new'
+  post 'sessions/new' => 'sessions#create'
+  delete 'sessions/logout' => 'sessions#destroy'
+
+  resources :users
+  resources :meetups
+
   get 'meetups/new'
   get 'meetups/edit'
   get 'meetups/index'
   get 'meetups/show'
+
   get 'users/new'
   get 'users/edit'
   get 'users/show'
