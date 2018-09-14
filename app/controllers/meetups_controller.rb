@@ -26,13 +26,25 @@ class MeetupsController < ApplicationController
     to_state = params[:to_state]
     redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{house}+#{address}+#{city}+#{state}&destination=#{to_house}+#{to_address}+#{to_city}+#{to_state}&travelmode=walking"
   end
-  
+
   def new
-  @client = Yelp::Fusion::Client.new("#{ENV['API_TOKEN']}")
+  @meetup = Meetup.new
+  @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
   @results = @client.search('New York City', term: 'restaurants')
   @text = @results.to_json
   @stuff = JSON.parse(@text)
+  end
 
+  def create
+    @meetup = Meetup.new(meetup_params)
+    @meetup.user_one = @current_user.id
+    @meetup.location = params[:location]
+    @meetup.meet_time = params[:meet_time]
+    if @meetup.save
+      redirect_to @meetup
+    else
+      render "new"
+  end
   end
 
   def edit
@@ -44,5 +56,10 @@ class MeetupsController < ApplicationController
   def show
   end
 
+  private
+
+  def meetup_params
+    params.require(:meetup).permit(:user_one, :meet_time, :location)
+  end
 
 end
