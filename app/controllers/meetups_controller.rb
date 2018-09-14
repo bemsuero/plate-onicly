@@ -32,7 +32,7 @@ class MeetupsController < ApplicationController
       redirect_to @meetup
     else
       render "new"
-  end
+    end
   end
 
   def edit
