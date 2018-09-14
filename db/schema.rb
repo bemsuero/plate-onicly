@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 2018_09_14_174137) do
     t.integer "user_id", null: false
   end
 
-
   create_table "meetups", force: :cascade do |t|
     t.string "user_one"
     t.string "user_two"

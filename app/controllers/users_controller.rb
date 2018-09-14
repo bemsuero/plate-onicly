@@ -2,14 +2,18 @@ class UsersController < ApplicationController
   def new
     @user = User.new
 
-    categories = ['Technology','TV','Business','Politics','Travel','Games','Movies','Theatre','Sports','Fashion']
-    categories.each do |c|
-      interest = Interest.new(name: c)
-      match = Interest.find_by(name: interest.name)
-      if !match
-        interest.save
-      end
-    end
+    # categories = ['Technology','TV','Business','Politics','Travel','Games','Movies','Theatre','Sports','Fashion']
+    # categories.each do |c|
+    #   interest = Interest.new(name: c)
+    #   match = Interest.find_by(name: interest.name)
+    #   p "did this save"
+    #   p interest
+    #   p "this didnt save"
+    #   p match
+    #   if !match
+    #     interest.save
+    #   end
+    # end
   end
 
   def create
@@ -17,6 +21,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to @user
     else
+      p @user.errors.messages
       render 'new'
     end
   end
@@ -33,6 +38,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name,:last_name,:age,:phone_number,:email,:password,:password_confirmation,:interests, expertise_ids:[])
+    params.require(:user).permit(:first_name,:last_name,:age,:phone_number,:email,:password,:password_confirmation, :interests, interest_ids:[])
   end
 end
