@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root 'pages#landing'
+  get 'pages/home'
+  get 'pages/about'
   get 'meetups/new'
   get 'meetups/edit'
   get 'meetups/index'
