@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-root to: "users#new"
+
+  root 'pages#landing'
 
   get "directions" => "meetups#directions"
 
@@ -7,6 +8,7 @@ root to: "users#new"
   post 'sessions/new' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
 
+  resources :pages
   resources :users do
   resources :meetups
 end

@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2018_09_14_202736) do
 
   create_table "interests", force: :cascade do |t|
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 2018_09_14_202736) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+
     t.integer "age"
     t.integer "phone_number"
     t.string "email"
