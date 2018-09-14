@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   before_save {self.email = email.downcase}
   has_secure_password
-  has_and_belongs_to_many :interests
+  has_many :meetups through: 
+  belongs_to :meetup
+  # has_and_belongs_to_many :interests
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
   # VALID_PHONE_REGEX = /\d/m
