@@ -1,5 +1,10 @@
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
+
+
+
+<%= link_to "Join Random Event", random_event_path %>
+
 <% if logged_in? %>
 <%= link_to("Log Out",sessions_logout_path,method: :delete, data: {confirm: 'Are you sure?'}) %>
 <% end %>
