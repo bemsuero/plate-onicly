@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root to: "users#new"
 
+  resources :users
+  resources :meetups
+
   get 'meetups/new'
   get 'meetups/edit'
   get 'meetups/index'
