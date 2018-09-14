@@ -9,7 +9,7 @@
 <label>Age:</label><br>
 <%= f.number_field :age, placeholder: "Age", min:18, max:120, required: true %><br><br>
 <label>Phone:</label><br>
-<%= f.telephone_field :phone_number, placeholder: "123-456-7890",pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}", required: true %><br><br>
+<%= f.telephone_field :phone_number, placeholder: "Phone Number",pattern: "[0-9]{10}", required: true %><br><br>
 <label>Please Choose your Interests:</label><br>
 <%= f.text_field :interests, placeholder: "Interests",required: true %><br><br>
 <label>Password:</label><br>
