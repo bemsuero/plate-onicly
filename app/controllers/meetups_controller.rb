@@ -31,8 +31,7 @@ class MeetupsController < ApplicationController
   @meetup = Meetup.new
   @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
   @results = @client.search('New York City', term: 'restaurants')
-  @text = @results.to_json
-  @stuff = JSON.parse(@text)
+  @yelp_response = JSON.parse(@results.to_json)
   end
 
   def create
