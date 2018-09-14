@@ -10,6 +10,7 @@ root to: "users#new"
   resources :users do
   resources :meetups
 end
+get "random_event" => "meetups#show"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

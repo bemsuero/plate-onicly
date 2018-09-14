@@ -15,17 +15,6 @@ class MeetupsController < ApplicationController
 #     @places = json["results"]
 #   end
 
-  def directions
-    house = params[:house_number]
-    address = params[:address]
-    city = params[:city]
-    state = params[:state]
-    to_house = params[:to_house_number]
-    to_address = params[:to_address]
-    to_city = params[:to_city]
-    to_state = params[:to_state]
-    redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{house}+#{address}+#{city}+#{state}&destination=#{to_house}+#{to_address}+#{to_city}+#{to_state}&travelmode=walking"
-  end
 
   def new
   @meetup = Meetup.new
@@ -53,7 +42,24 @@ class MeetupsController < ApplicationController
   end
 
   def show
+    random_meetup = Meetup.find_by("1")
+    p random_meetup
+    random_meetup.user_two = current_user.id
+    p random_meetup
+    random_meetup.save
   end
+
+    def directions
+      house = params[:house_number]
+      address = params[:address]
+      city = params[:city]
+      state = params[:state]
+      to_house = params[:to_house_number]
+      to_address = params[:to_address]
+      to_city = params[:to_city]
+      to_state = params[:to_state]
+      redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{house}+#{address}+#{city}+#{state}&destination=#{to_house}+#{to_address}+#{to_city}+#{to_state}&travelmode=walking"
+    end
 
   private
 
