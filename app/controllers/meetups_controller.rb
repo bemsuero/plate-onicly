@@ -43,7 +43,7 @@ class MeetupsController < ApplicationController
       redirect_to @meetup
     else
       render "new"
-  end
+    end
   end
 
   def edit
@@ -53,6 +53,7 @@ class MeetupsController < ApplicationController
   end
 
   def show
+    @meetup = Meetup.find(params[:id])
   end
 
   private
