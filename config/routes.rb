@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 root to: "users#new"
-
-  resources :meetups
-  resources :users
-
-  post "meetups/new" => "meetups#new"
-
   get "directions" => "meetups#directions"
+
+  get 'sessions/new'
+  post 'sessions/new' => 'sessions#create'
+  delete 'sessions/logout' => 'sessions#destroy'
+
+  resources :users
+  resources :meetups
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

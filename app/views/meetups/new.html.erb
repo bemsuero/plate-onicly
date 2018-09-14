@@ -1,19 +1,15 @@
-<h2>Pick a Place</h2>
-<% @places.each do |pl| %>
-<div class="places">
-<% if pl["types"].include?("lodging") %>
-<%else%>
-<%= pl["name"] %><br>
-<% if pl["rating"] != nil %>
-Rating: <%= pl["rating"] %><br>
-<% else %>
-Rating: N/A <br>
-<%end%>
-<% if pl["price_level"] != nil %>
-Pricing: <%= pl["price_level"] %><br>
-<% else %>
-Pricing: N/A <br>
-<%end%>
-</div>
-<%end%>
-<%end%>
+<% @stuff["businesses"].each do |b| %>
+  <div class="">
+    <p>Name:
+      <%= b["name"]%></p>
+    <p>Address:
+      <%= b["location"]['address1']%>,
+      <%= b["location"]['city']%>,
+      <%= b["location"]['zip_code']%></p>
+    <p>Rating:
+      <%= b["rating"] %></p>
+    <p>Reviews:
+      <%= @client.review(b["id"]).reviews[0].text %></p>
+  </div>
+  <hr>
+<% end %>
