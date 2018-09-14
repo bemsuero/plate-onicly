@@ -6,6 +6,8 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email].downcase)
     if @user && @user.authenticate(params[:session][:password])
       log_in(@user)
+      p "This is for Debugging User DB Tables"
+      p @user
       redirect_to @user
     else
       render "new"
