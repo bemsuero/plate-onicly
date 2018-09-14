@@ -10,19 +10,17 @@
 <%= f.number_field :age, placeholder: "Age", min:18, max:120, required: true %><br><br>
 <label>Phone:</label><br>
 <%= f.telephone_field :phone_number, placeholder: "Phone Number",pattern: "[0-9]{10}", required: true %><br><br>
-<!-- <label>Please Choose your Interests:</label><br>
-<%= f.text_field :interests, placeholder: "Interests",required: true %><br><br> -->
 
 <!-- Checkbox field begins -->
-<div class="field">
+<!-- <div class="field">
   <%= f.label "Interests" %><br>
-  <%= f.collection_check_boxes :interest_ids, Interest.all, :id, :name do |b| %>
+  <%= f.collection_check_boxes :interests, Interest.all, :id, :name do |b| %>
   <div class="collection-check-box">
     <%= b.check_box %>
     <%= b.label %>
   </div>
 <% end %>
-</div><br>
+</div><br> -->
 <!-- Checkbox field ends -->
 
 <label>Password:</label><br>
