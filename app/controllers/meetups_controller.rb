@@ -42,11 +42,15 @@ class MeetupsController < ApplicationController
   end
 
   def show
-    random_meetup = Meetup.find_by("1")
-    p random_meetup
-    random_meetup.user_two = current_user.id
-    p random_meetup
-    random_meetup.save
+  end
+
+  def random
+    @random_meetup = Meetup.find_by("1")
+    p @random_meetup
+    @random_meetup.user_two = current_user.id
+    p @random_meetup
+    @random_meetup.save
+    redirect_to @random_meetup
   end
 
     def directions
