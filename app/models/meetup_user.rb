@@ -1,4 +1,4 @@
 class MeetupUser < ApplicationRecord
-  belongs_to :meetup
   belongs_to :user
+  belongs_to :meetup
 end
