@@ -1,2 +1,15 @@
-<h1>Meetups#new</h1>
-<p>Find me in app/views/meetups/new.html.erb</p>
+<% @stuff["businesses"].each do |b| %>
+  <div class="">
+    <p>Name:
+      <%= b["name"]%></p>
+    <p>Address:
+      <%= b["location"]['address1']%>,
+      <%= b["location"]['city']%>,
+      <%= b["location"]['zip_code']%></p>
+    <p>Rating:
+      <%= b["rating"] %></p>
+    <p>Reviews:
+      <%= @client.review(b["id"]).reviews[0].text %></p>
+  </div>
+  <hr>
+<% end %>
