@@ -14,15 +14,15 @@
 <%= f.text_field :interests, placeholder: "Interests",required: true %><br><br> -->
 
 <!-- Checkbox field begins -->
-<div class="field">
+<!-- <div class="field">
   <%= f.label "Interests" %><br>
-  <%= f.collection_check_boxes :interest_ids, Interest.all, :id, :name do |b| %>
+  <%= f.collection_check_boxes :interests, Interest.all, :id, :name do |b| %>
   <div class="collection-check-box">
     <%= b.check_box %>
     <%= b.label %>
   </div>
 <% end %>
-</div><br>
+</div><br> -->
 <!-- Checkbox field ends -->
 
 <label>Password:</label><br>
