@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: "users#new"
 
+  get 'sessions/new'
+  post 'sessions/new' => 'sessions#create'
+  delete 'sessions/logout' => 'sessions#destroy'
+
   resources :users
   resources :meetups
 
