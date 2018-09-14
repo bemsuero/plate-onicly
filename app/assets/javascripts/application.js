@@ -15,25 +15,15 @@
 //= require turbolinks
 //= require_tree .
 
+require 'yelp'
 
-require "curb"
-require "json"
+Yelp.client.configure do |config|
+  config.consumer_key = YOUR_CONSUMER_KEY
+  config.consumer_secret = YOUR_CONSUMER_SECRET
+  config.token = YOUR_TOKEN
+  config.token_secret = YOUR_TOKEN_SECRET
+end
 
-c = Curl::Easy.http_get("https://api.yelp.com/v3/businesses/search/api/token", "grant_type=client_credentials"
-    ) do |curl|
-      curl.headers['Authorization'] = 'Basic VyrZpVa6N0USPBDlVv5wiA'
-    end
+Yelp.client.search('New York City', { term: 'food' })
 
-access_token = JSON.parse(c.body_str)["99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx"]
-
-{
-   "access_token": "NgCXRKc...MzYjw",
-   "token_type": "OAuth",
-   "expires_in": 3600,
-}
-
-//     Client ID
-// VyrZpVa6N0USPBDlVv5wiA
-//
-// API Key
-// 99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx
+ 
