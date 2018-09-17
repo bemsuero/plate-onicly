@@ -4,7 +4,7 @@ class MeetupsController < ApplicationController
   require 'json'
   require 'httparty'
   require 'yelp/fusion'
-  before_action :current_meetup, only: [:show, :directions, :cancel]
+  before_action :current_meetup, only: [:new, :show, :directions, :cancel]
 
 #   def new
 #     @meetup = Meetup.new
@@ -18,11 +18,15 @@ class MeetupsController < ApplicationController
 
 
   def new
+  if @current_meetup != nil || @current_meetup_joined != nil
+    redirect_to root_path
+  else
   @user = current_user
   @meetup = Meetup.new
   @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
   @results = @client.search('New York City', term: 'restaurants')
   @yelp_response = JSON.parse(@results.to_json)
+  end
   end
 
   def create
@@ -45,6 +49,9 @@ class MeetupsController < ApplicationController
   end
 
   def random
+    if @current_meetup != nil || @current_meetup_joined != nil
+      redirect_to root_path
+    else
     random = User.all.ids.shuffle[0]
     current_meetup = Meetup.find_by(random.to_s)
     if current_meetup.user_two == nil
@@ -53,6 +60,7 @@ class MeetupsController < ApplicationController
     redirect_to current_user
   else
     redirect_to root_path
+  end
   end
   end
 
