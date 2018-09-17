@@ -1,21 +1,18 @@
 Rails.application.routes.draw do
-  root to: "users#new"
+
+  root 'pages#landing'
+
+  get "directions" => "meetups#directions"
 
   get 'sessions/new'
   post 'sessions/new' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
 
-  resources :users
+  resources :pages
+  resources :users do
   resources :meetups
+end
+get "random_event" => "meetups#random"
 
-  get 'meetups/new'
-  get 'meetups/edit'
-  get 'meetups/index'
-  get 'meetups/show'
-
-  get 'users/new'
-  get 'users/edit'
-  get 'users/show'
-  get 'users/index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

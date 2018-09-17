@@ -1,3 +1,4 @@
+
 <% if logged_in? %>
   <h1>Welcome <%= @user.first_name %> <%= @user.last_name %></h1>
   <% @user.interests.each do |interest| %>
