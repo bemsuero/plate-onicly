@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_09_14_202736) do
   end
 
   create_table "meetups", force: :cascade do |t|
+    t.string "location_name"
     t.string "user_one"
     t.string "user_two"
     t.date "meet_date"

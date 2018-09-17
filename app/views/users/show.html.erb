@@ -1,13 +1,22 @@
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
 
+<%= current_user.id %> <br>
 
-
+<% if @current_meetup == nil %>
 <%= link_to "Create Event", new_user_meetup_path(current_user) %> <br>
+<% end %>
+<% if @current_meetup_joined == nil and Meetup.all.empty? == false %>
 <%= link_to "Join Random Event", random_event_path %><br>
+<% end %>
 
+<% if @current_meetup != nil %>
 <%= link_to "Current Event", user_meetup_path(current_user) %><br>
 <%= link_to "Cancel/End Event", cancel_event_path %><br>
+<% elsif @current_meetup_joined != nil %>
+<%= link_to "Current Event", user_meetup_path(current_user) %><br>
+<% else %>
+<% end %>
 
 <% if logged_in? %>
 <%= link_to("Log Out",sessions_logout_path,method: :delete, data: {confirm: 'Are you sure?'}) %>

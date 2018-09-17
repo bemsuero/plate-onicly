@@ -45,15 +45,20 @@ class MeetupsController < ApplicationController
   end
 
   def random
-    random = Users.all.ids.shuffle[0]
+    random = User.all.ids.shuffle[0]
     current_meetup = Meetup.find_by(random.to_s)
+    if current_meetup.user_two == nil
     current_meetup.user_two = current_user.id
     current_meetup.save
+    redirect_to current_user
+  else
     redirect_to root_path
+  end
   end
 
   def cancel
     @current_meetup.destroy
+    redirect_to root_path
   end
 
     def directions

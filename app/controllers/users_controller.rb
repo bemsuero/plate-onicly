@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :current_meetup, only: [:show, :directions, :cancel]
+
   def new
     @user = User.new
 
@@ -30,7 +32,7 @@ class UsersController < ApplicationController
   def edit
   end
 
-  
+
 
   def show
   end
@@ -43,4 +45,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:first_name,:last_name,:age,:phone_number,:email,:password,:password_confirmation, :interests, interest_ids:[])
   end
+
+  def current_meetup
+    @current_meetup = Meetup.find_by(user_one: current_user.id)
+    @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
+  end
+
 end
