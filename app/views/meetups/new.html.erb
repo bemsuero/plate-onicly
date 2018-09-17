@@ -1,15 +1,22 @@
 <% @yelp_response["businesses"].each do |b| %>
   <div class="">
     <p>Name:
-      <%= b["name"]%></p>
+      <%= b['name']%></p>
     <p>Address:
-      <%= b["location"]['address1']%>,
-      <%= b["location"]['city']%>,
-      <%= b["location"]['zip_code']%></p>
+      <%= b['location']['address1']%>,
+      <%= b['location']['city']%>,
+      <%= b['location']['zip_code']%></p>
     <p>Rating:
       <%= b["rating"] %></p>
     <p>Reviews:
       <%= @client.review(b["id"]).reviews[0].text %></p>
+      <%= form_for [@user, @meetup] do |m| %>
+      <%= m.time_select :meet_time, start_hour: 8, end_hour: 20, minute_step: 30, include_day: false, include_year: false, include_month: false, required: true %> <br>
+      <%= m.date_select :meet_date, :order => [:month, :day, :year], start_year: (Time.now.year), required: true %><br>
+      <%= m.text_field :location, value: "#{b['location']['address1']}, #{b['location']['city']}, #{b['location']['zip_code']}", hidden: true, required: true %>
+      <%= m.text_field :location_name, value: "#{b['name']}", hidden: true, required: true %>
+      <%= m.submit %>
+      <%end%>
   </div>
   <hr>
 <% end %>

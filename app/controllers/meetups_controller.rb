@@ -4,6 +4,7 @@ class MeetupsController < ApplicationController
   require 'json'
   require 'httparty'
   require 'yelp/fusion'
+  before_action :current_meetup, only: [:new, :show, :directions, :cancel]
 
 #   def new
 #     @meetup = Meetup.new
@@ -17,19 +18,22 @@ class MeetupsController < ApplicationController
 
 
   def new
+  if @current_meetup != nil || @current_meetup_joined != nil
+    redirect_to root_path
+  else
+  @user = current_user
   @meetup = Meetup.new
   @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
   @results = @client.search('New York City', term: 'restaurants')
   @yelp_response = JSON.parse(@results.to_json)
   end
+  end
 
   def create
     @meetup = Meetup.new(meetup_params)
-    @meetup.user_one = @current_user.id
-    @meetup.location = params[:location]
-    @meetup.meet_time = params[:meet_time]
+    @meetup.user_one = current_user.id
     if @meetup.save
-      redirect_to @meetup
+      redirect_to root_path
     else
       render "new"
     end
@@ -45,12 +49,24 @@ class MeetupsController < ApplicationController
   end
 
   def random
-    @random_meetup = Meetup.find_by("1")
-    p @random_meetup
-    @random_meetup.user_two = current_user.id
-    p @random_meetup
-    @random_meetup.save
-    redirect_to @random_meetup
+    if @current_meetup != nil || @current_meetup_joined != nil
+      redirect_to root_path
+    else
+    random = User.all.ids.shuffle[0]
+    current_meetup = Meetup.find_by(random.to_s)
+    if current_meetup.user_two == nil
+    current_meetup.user_two = current_user.id
+    current_meetup.save
+    redirect_to current_user
+  else
+    redirect_to root_path
+  end
+  end
+  end
+
+  def cancel
+    @current_meetup.destroy
+    redirect_to root_path
   end
 
     def directions
@@ -58,17 +74,24 @@ class MeetupsController < ApplicationController
       address = params[:address]
       city = params[:city]
       state = params[:state]
-      to_house = params[:to_house_number]
-      to_address = params[:to_address]
-      to_city = params[:to_city]
-      to_state = params[:to_state]
-      redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{house}+#{address}+#{city}+#{state}&destination=#{to_house}+#{to_address}+#{to_city}+#{to_state}&travelmode=walking"
+      if @current_meetup != nil
+      redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{house}+#{address}+#{city}+#{state}&destination=#{@current_meetup.location}&travelmode=walking"
+    elsif @current_meetup_joined != nil
+      redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{house}+#{address}+#{city}+#{state}&destination=#{@current_meetup_joined.location}&travelmode=walking"
+    else
+      redirect_to root_path
+    end
     end
 
   private
 
   def meetup_params
-    params.require(:meetup).permit(:user_one, :meet_time, :location)
+    params.require(:meetup).permit(:user_one, :meet_date, :meet_time, :location)
+  end
+
+  def current_meetup
+    @current_meetup = Meetup.find_by(user_one: current_user.id)
+    @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
   end
 
 end

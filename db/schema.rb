@@ -32,9 +32,11 @@ ActiveRecord::Schema.define(version: 2018_09_14_202736) do
   end
 
   create_table "meetups", force: :cascade do |t|
+    t.string "location_name"
     t.string "user_one"
     t.string "user_two"
-    t.datetime "meet_time"
+    t.date "meet_date"
+    t.time "meet_time"
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,10 +45,10 @@ ActiveRecord::Schema.define(version: 2018_09_14_202736) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.integer "phone_number"
+    t.integer "age"
+    t.string "phone_number"
     t.string "email"
     t.string "password_digest"
-    t.string "interests"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
