@@ -43,6 +43,7 @@ class UsersController < ApplicationController
 
   end
 
+
   def current_meetup
     @current_meetup = Meetup.find_by(user_one: current_user.id)
     @current_meetup_joined = Meetup.find_by(user_two: current_user.id)

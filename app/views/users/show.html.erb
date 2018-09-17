@@ -1,8 +1,10 @@
+<div class="userHome">
+
 <% if logged_in? %>
-  <h1>Welcome <%= @user.first_name %> <%= @user.last_name %> User <%= current_user.id %> <br></h1>
+  <h1>Welcome <br><%= @user.first_name %> <%= @user.last_name %> <% current_user.id %> <br></h1>
   <% @user.interests.each do |interest| %>
     <%= interest.name %><br>
-  <% end %><br><br>
+  <% end %><br>
 
 
 
@@ -24,7 +26,7 @@
 <% else %>
 <% end %>
 
-  <%= link_to("Log Out",sessions_logout_path,method: :delete, data: {confirm: 'Are you sure?'}) %>
 <% else %>
   <h1>(You are not logged in)</h1>
 <% end %>
+</div>
