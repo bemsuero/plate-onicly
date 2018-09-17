@@ -1,10 +1,11 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-
-
-
-<%= link_to "Join Random Event", random_event_path %>
 
 <% if logged_in? %>
-<%= link_to("Log Out",sessions_logout_path,method: :delete, data: {confirm: 'Are you sure?'}) %>
+  <h1>Welcome <%= @user.first_name %> <%= @user.last_name %></h1>
+  <% @user.interests.each do |interest| %>
+    <%= interest.name %><br>
+  <% end %><br><br>
+  <%= link_to("Log Out",sessions_logout_path,method: :delete, data: {confirm: 'Are you sure?'}) %>
+
+<% else %>
+  <h1>Users#show (You are not logged in)</h1>
 <% end %>
