@@ -9,7 +9,7 @@
 <label>Age:</label><br>
 <%= f.number_field :age, placeholder: "Age", min:18, max:120, required: true %><br><br>
 <label>Phone:</label><br>
-<%= f.string :phone_number, placeholder: "Phone Number", pattern: "[0-9]{10}", required: true %><br><br>
+<%= f.text_field :phone_number, placeholder: "Phone Number", pattern: "[0-9]{10}", required: true %><br><br>
 
 <!-- Checkbox field begins -->
 <div class="field">
