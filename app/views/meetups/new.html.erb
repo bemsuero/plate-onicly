@@ -1,11 +1,12 @@
 <% if @eat_area == nil %>
 <h2>Where area you like to eat?</h2>
-<%= form_tag(new_user_meetup_path(current_user), method: "get") %>
+<%= form_tag(new_meetup_path, method: "get") %>
 <%= label_tag(:eat_area, "Enter Address") %><%= text_field_tag(:eat_area) %> <br>
 <%= submit_tag "Get Places!" %>
 <% else %>
+<div class="yelpList">
 <% @yelp_response["businesses"].each do |b| %>
-  <div class="">
+  <div class="grid-item yelp">
     <p>Name:
       <%= b['name']%></p>
     <p>Address:
@@ -18,7 +19,7 @@
       <%= b["rating"] %></p>
     <p>Reviews:
       <%= @client.review(b["id"]).reviews[0].text %></p>
-      <%= form_for [@user, @meetup] do |m| %>
+      <%= form_for @meetup do |m| %>
       <%= m.time_select :meet_time, start_hour: 8, end_hour: 20, minute_step: 30, include_day: false, include_year: false, include_month: false, required: true %> <br>
       <%= m.date_select :meet_date, :order => [:month, :day, :year], start_year: (Time.now.year), required: true %><br>
       <%= m.text_field :location, value: "#{b['location']['address1']}, #{b['location']['city']}, #{b['location']['zip_code']}", hidden: true, required: true %>
@@ -26,6 +27,6 @@
       <%= m.submit %>
       <%end%>
   </div>
-  <hr>
 <% end %>
+</div>
 <% end %>

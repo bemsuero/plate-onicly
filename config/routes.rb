@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   delete 'sessions/logout' => 'sessions#destroy'
 
   resources :pages
-  resources :users do
+  resources :users
   resources :meetups
-end
+
 
 get "random_event" => "meetups#random"
 get "cancel_event" => "meetups#cancel"

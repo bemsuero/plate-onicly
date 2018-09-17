@@ -13,7 +13,6 @@ class MeetupsController < ApplicationController
     @eat_area = params[:eat_area]
     if @eat_area == nil
     else
-  @user = current_user
   @meetup = Meetup.new
   @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
   @results = @client.search("#{@eat_area}", term: 'restaurants')
@@ -24,9 +23,8 @@ class MeetupsController < ApplicationController
 
   def create
     @meetup = Meetup.new(meetup_params)
-    @meetup.user_one = current_user.id
     if @meetup.save
-        redirect_to current_user
+        redirect_to meetups_path
     else
       render "new"
     end
