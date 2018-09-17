@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # This is different
 
   root 'pages#landing'
 
@@ -11,10 +10,9 @@ Rails.application.routes.draw do
 
   resources :pages
   resources :users do
-    resources :meetups
-  end
-  
-  get "random_event" => "meetups#random"
+  resources :meetups
+end
+get "random_event" => "meetups#random"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
