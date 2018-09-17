@@ -3,8 +3,8 @@ class UsersController < ApplicationController
     @user = User.new
 
     categories = ['Technology','TV','Business','Politics','Travel','Games','Movies','Theatre','Sports','Fashion']
-    categories.each do |c|
-      interest = Interest.new(name: c)
+    categories.each do |category|
+      interest = Interest.new(name: category)
       match = Interest.find_by(name: interest.name)
       if !match
         interest.save
