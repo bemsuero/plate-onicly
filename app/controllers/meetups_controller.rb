@@ -4,28 +4,21 @@ class MeetupsController < ApplicationController
   require 'json'
   require 'httparty'
   require 'yelp/fusion'
-  before_action :current_meetup, only: [:new, :show, :directions, :cancel]
-
-#   def new
-#     @meetup = Meetup.new
-#     location = params[:location]
-#     # uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.7079996,-74.0067468&rankby=distance&type=restaurant&key=#{ENV['API_TOKEN']}")
-#     uri = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.7079996,-74.0067468&rankby=distance&type=restaurant&key=AIzaSyCk6eRqZiFhkKrymT8EUR21OZ4Jf2J9Xgs")
-#     raw_data = HTTParty.get(uri)
-#     json = raw_data.parsed_response
-#     @places = json["results"]
-#   end
-
+  before_action :current_meetup, only: [:new, :show, :directions, :cancel, :leave]
 
   def new
   if @current_meetup != nil || @current_meetup_joined != nil
     redirect_to root_path
   else
+    @eat_area = params[:eat_area]
+    if @eat_area == nil
+    else
   @user = current_user
   @meetup = Meetup.new
   @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
-  @results = @client.search('New York City', term: 'restaurants')
+  @results = @client.search("#{@eat_area}", term: 'restaurants')
   @yelp_response = JSON.parse(@results.to_json)
+  end
   end
   end
 
@@ -33,7 +26,7 @@ class MeetupsController < ApplicationController
     @meetup = Meetup.new(meetup_params)
     @meetup.user_one = current_user.id
     if @meetup.save
-      redirect_to root_path
+        redirect_to current_user
     else
       render "new"
     end
@@ -54,7 +47,7 @@ class MeetupsController < ApplicationController
     else
     random = User.all.ids.shuffle[0]
     current_meetup = Meetup.find_by(random.to_s)
-    if current_meetup.user_two == nil
+    if current_meetup.user_two == nil && current_meetup.user_one != current_user.id
     current_meetup.user_two = current_user.id
     current_meetup.save
     redirect_to current_user
@@ -66,8 +59,14 @@ class MeetupsController < ApplicationController
 
   def cancel
     @current_meetup.destroy
-    redirect_to root_path
+    redirect_to current_user
   end
+
+  def leave
+    @current_meetup_joined.user_two = nil
+    @current_meetup_joined.save
+      redirect_to current_user
+    end
 
     def directions
       house = params[:house_number]
@@ -79,14 +78,14 @@ class MeetupsController < ApplicationController
     elsif @current_meetup_joined != nil
       redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{house}+#{address}+#{city}+#{state}&destination=#{@current_meetup_joined.location}&travelmode=walking"
     else
-      redirect_to root_path
+      redirect_to current_user
     end
     end
 
   private
 
   def meetup_params
-    params.require(:meetup).permit(:user_one, :meet_date, :meet_time, :location)
+    params.require(:meetup).permit(:user_one, :meet_date, :meet_time, :location, :location_name)
   end
 
   def current_meetup

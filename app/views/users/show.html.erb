@@ -1,19 +1,18 @@
 <div class="userHome">
 
 <% if logged_in? %>
-  <h1>Welcome <br><%= @user.first_name %> <%= @user.last_name %> <% current_user.id %> <br></h1>
+  <h1>Welcome <%= @user.first_name %> <%= @user.last_name %> User#: <%= current_user.id %> <br></h1>
   <% @user.interests.each do |interest| %>
     <%= interest.name %><br>
   <% end %><br>
 
 
 
-<% if @current_meetup == nil %>
+<% if @current_meetup == nil and @current_meetup_joined == nil %>
 <%= link_to "Create Event", new_user_meetup_path(current_user) %> <br>
-<% else %>
-<% if @current_meetup_joined == nil and Meetup.all.empty? == false %>
-<%= link_to "Join Random Event", random_event_path %><br>
 <% end %>
+<% if @current_meetup == nil and @current_meetup_joined == nil and Meetup.all.empty? == false %>
+<%= link_to "Join Random Event", random_event_path %><br>
 <% end %>
 
 
@@ -23,6 +22,7 @@
 <%= link_to "Cancel/End Event", cancel_event_path %><br>
 <% elsif @current_meetup_joined != nil %>
 <%= link_to "Current Event", user_meetup_path(current_user) %><br>
+<%= link_to "Leave Event", leave_event_path %><br>
 <% else %>
 <% end %>
 

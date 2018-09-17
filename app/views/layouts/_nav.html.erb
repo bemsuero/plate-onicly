@@ -1,7 +1,7 @@
 <nav>
   <button type="button" name="button" class="menu">Menu</button>
   <ul class="hidenav">
-    <li><<a href="#">Home</a></li>
+    <li><a href="#">Home</a></li>
     <% if logged_in? %>
     <li><%= link_to("Log out",sessions_logout_path,method: :delete, data: {confirm: 'Are you sure?'}) %></li>
     <% else %>
