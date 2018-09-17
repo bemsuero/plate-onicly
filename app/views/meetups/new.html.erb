@@ -1,3 +1,9 @@
+<% if @eat_area == nil %>
+<h2>Where area you like to eat?</h2>
+<%= form_tag(new_user_meetup_path(current_user), method: "get") %>
+<%= label_tag(:eat_area, "Enter Address") %><%= text_field_tag(:eat_area) %> <br>
+<%= submit_tag "Get Places!" %>
+<% else %>
 <% @yelp_response["businesses"].each do |b| %>
   <div class="">
     <p>Name:
@@ -6,6 +12,8 @@
       <%= b['location']['address1']%>,
       <%= b['location']['city']%>,
       <%= b['location']['zip_code']%></p>
+    <p>Price:
+      <%= b["price"] %></p>
     <p>Rating:
       <%= b["rating"] %></p>
     <p>Reviews:
@@ -19,4 +27,5 @@
       <%end%>
   </div>
   <hr>
+<% end %>
 <% end %>

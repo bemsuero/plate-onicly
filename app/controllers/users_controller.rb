@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   end
 
   def index
+      redirect_to current_user
   end
 
   private
