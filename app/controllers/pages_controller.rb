@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def landing
+    @user = User.new
   end
 
   def home
@@ -7,4 +8,5 @@ class PagesController < ApplicationController
 
   def about
   end
+
 end

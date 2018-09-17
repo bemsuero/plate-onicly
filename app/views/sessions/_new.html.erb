@@ -1,6 +1,9 @@
+
 <h1>Log In</h1>
 <%= form_for(:session, url: sessions_new_path) do |f| %>
-<%= f.email_field :email, placeholder: "Email", required: true %><br><br>
+<%= f.label 'Email'%><br>
+<%= f.email_field :email, placeholder: "Email", required: true %><br>
+<%= f.label 'Password'%><br>
 <%= f.password_field :password, placeholder: "Password", required: true %><br><br>
-<%= f.submit "Log In" %>
+<%= f.submit "Log In", class:'btn' %>
 <% end %>
