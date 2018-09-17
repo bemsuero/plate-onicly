@@ -3,7 +3,11 @@
 
 
 
-<%= link_to "Join Random Event", random_event_path %>
+<%= link_to "Create Event", new_user_meetup_path(current_user) %> <br>
+<%= link_to "Join Random Event", random_event_path %><br>
+
+<%= link_to "Current Event", user_meetup_path(current_user) %><br>
+<%= link_to "Cancel/End Event", cancel_event_path %><br>
 
 <% if logged_in? %>
 <%= link_to("Log Out",sessions_logout_path,method: :delete, data: {confirm: 'Are you sure?'}) %>

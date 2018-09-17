@@ -1,14 +1,8 @@
 <h2>How to get there!</h2>
-
 <%= form_tag("/directions", method: "get") %>
 From: <br>
 <%= label_tag(:house_number, "House Number") %><%= text_field_tag(:house_number)%><br>
 <%= label_tag(:address, "Address") %><%= text_field_tag(:address) %> <br>
 <%= label_tag(:city, "City") %><%= text_field_tag(:city) %> <br>
 <%= label_tag(:state, "State") %><%= text_field_tag(:state)%> <br>
-To: <br>
-<%= label_tag(:house_number, "House Number") %><%= text_field_tag(:to_house_number)%><br>
-<%= label_tag(:to_address, "Address") %><%= text_field_tag(:to_address) %> <br>
-<%= label_tag(:to_city, "City") %><%= text_field_tag(:to_city) %> <br>
-<%= label_tag(:to_state, "State") %><%= text_field_tag(:to_state)%> <br>
 <%= submit_tag "Get Directions" %>
