@@ -1,7 +1,10 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% if logged_in? %>
+  <h1>Welcome <%= @user.first_name %> <%= @user.last_name %> User <%= current_user.id %> <br></h1>
+  <% @user.interests.each do |interest| %>
+    <%= interest.name %><br>
+  <% end %><br><br>
 
-<%= current_user.id %> <br>
+
 
 <% if @current_meetup == nil %>
 <%= link_to "Create Event", new_user_meetup_path(current_user) %> <br>
@@ -18,6 +21,7 @@
 <% else %>
 <% end %>
 
-<% if logged_in? %>
-<%= link_to("Log Out",sessions_logout_path,method: :delete, data: {confirm: 'Are you sure?'}) %>
+  <%= link_to("Log Out",sessions_logout_path,method: :delete, data: {confirm: 'Are you sure?'}) %>
+<% else %>
+  <h1>(You are not logged in)</h1>
 <% end %>
