@@ -208,7 +208,8 @@ nav ul li a:hover {
 }
 .yelp {
   height: 250px;
-  background: white;
+  background-image: radial-gradient(rgba(255,255,224), white), url("/menu.jpg");
+  background-position: center;
   box-sizing: content-box;
   padding: 5px;
 
