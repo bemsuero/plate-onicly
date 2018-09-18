@@ -1,5 +1,7 @@
 {
   "name": "project7",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.3.1"
+  }
 }
