@@ -4,6 +4,6 @@ class ApplicationMailer < ActionMailer::Base
 
   def confirmation_email(guest_user)
     @guest_user = guest_user
-    mail(to: 'akkount35@gmail.com', subject: 'Welcome to My Awesome Site')
+    mail(to: @guest_user[:email], subject: 'You have succesfully joined a meetup')
   end
 end
