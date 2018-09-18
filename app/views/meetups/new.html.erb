@@ -2,20 +2,23 @@
 <% if current_user == nil %>
 
 <% if @eat_area == nil %>
-<%= form_tag(new_meetup_path, method: "get") %>
+<%= form_tag(new_meetup_path, method: "get") do %>
 <h3>where would you like to eat?</h3>
 <%= label_tag(:eat_area, "Enter Address: ") %><%= text_field_tag(:eat_area) %> <br>
 <%= submit_tag "Get Places!" %>
+<% end %>
 
 <h3>Would you like to join a random lunch?</h3>
-<%= form_tag(random_event_path, method: "get") %>
+<%= form_tag(random_event_path, method: "get") do %>
 <label for="meetup[name]">Your Name: </label>
-<input type="text" name="meetup[name]" required> <br>
+<input type="text" name="meetup[name]"> <br>
 <label for="meetup[phone]">Your Phone Number: </label>
-<input type="text" name="meetup[phone]" required> <br>
+<input type="text" name="meetup[phone]"> <br>
 <label for="meetup[email]">Email Address: </label>
-<input type="text" name="meetup[email]" required> <br>
+<input type="text" name="meetup[email]"> <br>
 <%= submit_tag "Join a random lunch!" %>
+<% end %>
+
 <% else %>
 <% @yelp_response["businesses"].each do |b| %>
   <div class="">
@@ -59,10 +62,11 @@
     <div class="location">
       <div class="pickLocation">
         <h2>Where area you like to eat?</h2>
-        <%= form_tag(new_meetup_path, method: "get") %>
+        <%= form_tag(new_meetup_path, method: "get") do %>
         <%= label_tag(:eat_area, "Enter Address") %><%= text_field_tag(:eat_area) %>
         <br>
-        <%= button_tag "Get Places!" %>
+        <%= submit_tag "Get Places!" %>
+        <% end %>
       </div>
       <div class="join">
         <h2>Click here to meetup</h2>

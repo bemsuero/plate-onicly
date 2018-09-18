@@ -14,7 +14,7 @@ class MeetupsController < ApplicationController
     unless @eat_area != nil
     else
         @meetup = Meetup.new
-        @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
+        @client = Yelp::Fusion::Client.new("z_VWpGhFnlmF-o3D4Q9WOaKJn8UxTPjZkA6ntFoNyoXegUVTtw1L9vOT2o9EDOJo369oYIood2H34v80V03ZVTqEJmW9u2vMPXXLbpeXaMG_aF0hjNI_6F-Vd0ehW3Yx")
         @results = @client.search("#{@eat_area}", term: 'restaurants')
         @yelp_response = JSON.parse(@results.to_json)
 end
@@ -25,7 +25,7 @@ elsif
     else
     @user = current_user
     @meetup = Meetup.new
-    @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
+    @client = Yelp::Fusion::Client.new("z_VWpGhFnlmF-o3D4Q9WOaKJn8UxTPjZkA6ntFoNyoXegUVTtw1L9vOT2o9EDOJo369oYIood2H34v80V03ZVTqEJmW9u2vMPXXLbpeXaMG_aF0hjNI_6F-Vd0ehW3Yx")
     @results = @client.search("#{@eat_area}", term: 'restaurants')
     @yelp_response = JSON.parse(@results.to_json)
   end
