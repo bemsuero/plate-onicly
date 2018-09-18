@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_14_202736) do
+ActiveRecord::Schema.define(version: 2018_09_18_155835) do
+
+  create_table "guest_users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "meetup_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "interests", force: :cascade do |t|
     t.string "name"
@@ -38,8 +47,11 @@ ActiveRecord::Schema.define(version: 2018_09_14_202736) do
     t.date "meet_date"
     t.time "meet_time"
     t.string "location"
+    t.integer "guest_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_meetups_on_slug", unique: true
   end
 
   create_table "users", force: :cascade do |t|

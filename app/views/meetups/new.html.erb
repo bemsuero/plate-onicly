@@ -1,3 +1,83 @@
+
+<% if current_user == nil %>
+
+<% if @eat_area == nil %>
+<%= form_tag(new_meetup_path, method: "get") %>
+<h3>where would you like to eat?</h3>
+<%= label_tag(:eat_area, "Enter Address: ") %><%= text_field_tag(:eat_area) %> <br>
+<%= submit_tag "Get Places!" %>
+
+<h3>Would you like to join a random lunch?</h3>
+<%= link_to "Join Here!", "#" %>
+<% else %>
+<% @yelp_response["businesses"].each do |b| %>
+  <div class="">
+    <p>Name:
+      <%= b['name']%></p>
+    <p>Address:
+      <%= b['location']['address1']%>,
+      <%= b['location']['city']%>,
+      <%= b['location']['zip_code']%></p>
+    <p>Price:
+      <%= b["price"] %></p>
+    <p>Rating:
+      <%= b["rating"] %></p>
+    <p>Reviews:
+  <%= @client.review(b["id"]).reviews[0].text %></p>
+      <%= form_for [@meetup] do |m| %>
+      <% @location = b['location']['address1'] + " " + b['location']['city'] + " " + b['location']['zip_code'] %>
+      <label for="meet_time">Meet Time: </label>
+      <input type="time" name="meet_time" required> <br>
+      <label for="meet_date">Meet Date: </label>
+      <input type="date" name="meet_date" required> <br>
+      <label for="meetup[name]">Your Name: </label>
+      <input type="text" name="meetup[name]" required> <br>
+      <label for="meetup[phone]">Your Phone Number: </label>
+      <input type="text" name="meetup[phone]" required> <br>
+      <label for="meetup[email]">Email Address: </label>
+      <input type="text" name="meetup[email]" required> <br>
+      <input type="text" name="location" value="<%= @location %>" hidden required> <br>
+      <input type="text" name="location_name" value="<%= b['name'] %>" hidden required> <br>
+      <%= m.submit %>
+      <%end%>
+  </div>
+  <hr>
+<% end %>
+<% end %>
+
+<% else %>
+
+<% if @eat_area == nil %>
+<h2>Where area you like to eat?</h2>
+<%= form_tag(new_meetup_path, method: "get") %>
+<%= label_tag(:eat_area, "Enter Address") %><%= text_field_tag(:eat_area) %> <br>
+<%= submit_tag "Get Places!" %>
+<% else %>
+<div class="yelpList">
+<% @yelp_response["businesses"].each do |b| %>
+  <div class="grid-item yelp">
+    <p>Name:
+      <%= b['name']%></p>
+    <p>Address:
+      <%= b['location']['address1']%>,
+      <%= b['location']['city']%>,
+      <%= b['location']['zip_code']%></p>
+    <p>Price:
+      <%= b["price"] %></p>
+    <p>Rating:
+      <%= b["rating"] %></p>
+    <p>Reviews:
+      <%= @client.review(b["id"]).reviews[0].text %></p>
+      <%= form_for [@user, @meetup] do |m| %>
+      Meet Time: <%= m.time_select :meet_time, start_hour: 8, end_hour: 20, minute_step: 30, include_day: false, include_year: false, include_month: false, required: true %> <br>
+      Meet Date: <%= m.date_select :meet_date, :order => [:month, :day, :year], start_year: (Time.now.year), required: true %><br>
+      <%= m.text_field :location, value: "#{b['location']['address1']}, #{b['location']['city']}, #{b['location']['zip_code']}", hidden: true, required: true %>
+      <%= m.text_field :location_name, value: "#{b['name']}", hidden: true, required: true %>
+      <%= m.submit %>
+      <%end%>
+    
+#############################    
+    
 <div class="main">
   <div class="headline">
     <div class="location">
@@ -50,3 +130,6 @@
   <% end %>
   </div>
 </div>
+<% end %>
+
+<% end %>

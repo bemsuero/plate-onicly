@@ -4,30 +4,72 @@ class MeetupsController < ApplicationController
   require 'json'
   require 'httparty'
   require 'yelp/fusion'
-  before_action :current_meetup, only: [:new, :show, :directions, :cancel, :leave]
+  before_action :current_meetup, only: [:cancel, :leave]
+  before_action :current_meetup_slug, only: [:show, :directions]
 
   def new
-  if @current_meetup != nil || @current_meetup_joined != nil
-    redirect_to root_path
-  else
-    @eat_area = params[:eat_area]
-    if @eat_area == nil
+    if current_user == nil
+      @eat_area = params[:eat_area]
+      session[:location] = @eat_area
+    unless @eat_area != nil
     else
-  @meetup = Meetup.new
-  @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
-  @results = @client.search("#{@eat_area}", term: 'restaurants')
-  @yelp_response = JSON.parse(@results.to_json)
+        @meetup = Meetup.new
+        @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
+        @results = @client.search("#{@eat_area}", term: 'restaurants')
+        @yelp_response = JSON.parse(@results.to_json)
+end
+elsif
+    @eat_area = params[:eat_area]
+    session[:location] = @eat_area
+  if @eat_area == nil
+    else
+    @user = current_user
+    @meetup = Meetup.new
+    @client = Yelp::Fusion::Client.new("99uhaoGtL2nGG5okFnRrDIqjL38zu0djkdZbsQcKXQisixYIbnxzDhHSs3O3nQ3l7Y2CacILy6CJWkiDeNxJ_wWhGZ8HRxudobFUtZ5a8t-LQ1D1UlsjdTZKDsCaW3Yx")
+    @results = @client.search("#{@eat_area}", term: 'restaurants')
+    @yelp_response = JSON.parse(@results.to_json)
   end
   end
-  end
+end
+    # elsif @current_meetup != nil || @current_meetup_joined != nil
+    #   redirect_to root_path
+
+  #     end
+  # end
+  # end
 
   def create
-    @meetup = Meetup.new(meetup_params)
-    if @meetup.save
-        redirect_to meetups_path
+    if current_user == nil
+      @meet_date = params[:meet_date]
+      @meet_time = params[:meet_time]
+      @location = params[:location]
+      @location_name = params[:location_name]
+      @meetup = Meetup.new(
+        meet_date: @meet_date,
+        meet_time: @meet_time,
+        location: @location,
+        location_name: @location_name,
+        guest_user: GuestUser.new)
+      p "creating guest user..."
+      session[:destination_address] = @location
+      if @meetup.save
+      guest = GuestUser.create(name: params["meetup"]["name"],
+                            phone: params["meetup"]["phone"],
+                            email: params["meetup"]["email"]) #create and validate is the correct way
+      p "guest user created"
+      @meetup.guest_user_id = guest.id
+      @meetup.generate_slug
+      redirect_to("/meetup/#{@meetup.slug}")
+    # elsif
+    # @meetup = Meetup.new(meetup_params)
+    # @meetup.user_one = current_user.id
+    #     redirect_to current_user
     else
+      p @meetup.errors.messages
+      p "creating guest user failed"
       render "new"
     end
+  end
   end
 
   def edit
@@ -37,6 +79,7 @@ class MeetupsController < ApplicationController
   end
 
   def show
+        @meetup = Meetup.find_by(slug: params[:slug])
   end
 
   def random
@@ -67,14 +110,12 @@ class MeetupsController < ApplicationController
     end
 
     def directions
-      house = params[:house_number]
-      address = params[:address]
-      city = params[:city]
-      state = params[:state]
-      if @current_meetup != nil
-      redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{house}+#{address}+#{city}+#{state}&destination=#{@current_meetup.location}&travelmode=walking"
+    if current_user == nil
+    redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{session[:destination_address]}&travelmode=walking"
+    elsif @current_meetup != nil
+      redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup.location}&travelmode=walking"
     elsif @current_meetup_joined != nil
-      redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{house}+#{address}+#{city}+#{state}&destination=#{@current_meetup_joined.location}&travelmode=walking"
+      redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup_joined.location}&travelmode=walking"
     else
       redirect_to current_user
     end
@@ -83,12 +124,16 @@ class MeetupsController < ApplicationController
   private
 
   def meetup_params
-    params.require(:meetup).permit(:user_one, :meet_date, :meet_time, :location, :location_name)
+    params.require(:meetup).permit(:user_one, :meet_date, :meet_time, :location, :guest_user, :location_name)
   end
 
   def current_meetup
     # @current_meetup = Meetup.find_by(user_one: current_user.id)
     # @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
   end
+
+  def current_meetup_slug
+      @meetup = Meetup.find_by(slug: params[:slug])
+    end
 
 end

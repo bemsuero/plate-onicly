@@ -15,3 +15,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
+
+document.getElementById("meet_time").step = "30"
+document.getElementById("meet_time").min = "8:00"
+document.getElementById("meet_time").max = "20:00"
