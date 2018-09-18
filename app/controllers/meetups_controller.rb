@@ -87,23 +87,27 @@ end
     if current_user == nil
       all = Meetup.all
       only_guest_meetup = all.where("slug").shuffle[0]
-      guest = GuestUser.create(name: params["meetup"]["name"],
+      until only_guest_meetup.joiner_id != nil
+        only_guest_meetup = all.where("slug").shuffle[0]
+      end
+          guest = GuestUser.create(name: params["meetup"]["name"],
                             phone: params["meetup"]["phone"],
                             email: params["meetup"]["email"])
-    only_guest_meetup.joiner_id = guest.id
-    redirect_to("/meetup/#{only_guest_meetup.slug}")
-  elsif
-    random = User.all.ids.shuffle[0]
-    current_meetup = Meetup.find_by(random.to_s)
-    if current_meetup.user_two == nil && current_meetup.user_one != current_user.id
-    current_meetup.user_two = current_user.id
-    current_meetup.save
-    redirect_to current_user
-  else
-    redirect_to root_path
+          only_guest_meetup.joiner_id = guest.id
+          only_guest_meetup.save
+          redirect_to("/meetup/#{only_guest_meetup.slug}")
+  # if current_user != nil
+  #   random = User.all.ids.shuffle[0]
+  #   current_meetup = Meetup.find_by(random.to_s)
+  #   if current_meetup.user_two == nil && current_meetup.user_one != current_user.id
+  #   current_meetup.user_two = current_user.id
+  #   current_meetup.save
+  #   redirect_to current_user
+# elsif
+#     redirect_to root_path
   end
   end
-  end
+  # end
 
   def cancel
     @current_meetup.destroy
