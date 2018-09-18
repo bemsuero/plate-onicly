@@ -5,8 +5,8 @@
 body{
   width: 100vw;
   height: 100vh;
-  overflow: scroll;
-  /* background: url('/food.jpg'); */
+  overflow: hidden;
+  background: url('/food.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -68,9 +68,9 @@ nav ul li a:hover {
 
 .main {
   width: 100vw;
-  height: 96vh;
+  height: 100vh;
   position: absolute;
-  overflow: scroll;
+  overflow: hidden;
   border-bottom: black 3px solid;
 }
 
@@ -87,10 +87,11 @@ nav ul li a:hover {
 
 }
 .toprest{
+  position: relative;
   box-sizing: border-box;
   padding: 20px;
   width: 100vw;
-  height: 95vh;
+  height: 90vh;
   background: white;
   box-shadow: 0 6px 2px rgba(0, 0, 0, 0.5);
 
@@ -105,6 +106,21 @@ nav ul li a:hover {
   display: grid;
   grid-template: auto/ auto auto auto auto;
   grid-gap: 25px;
+}
+.landbox{
+  float: right;
+  position: relative;
+  width: 70vw;
+  height: 80vh;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px;
+  color: white;
+  font-size: 17px;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+
 }
 .grid-item{
   box-sizing: border-box;
@@ -136,14 +152,17 @@ nav ul li a:hover {
 .bottom {
   width: 100vw;
   height: 25vh;
+  background: rgba(0,0,0,.6);
 }
 
 .popup {
-  position: absolute;
+  position: fixed;
+  top:25px;
   width: 100vw;
   height: 100vh;
-  background: ;
-  z-index: 1;
+  background:rgba(255,0,0,.3) ;
+  z-index: 2;
+  overflow: hidden;
   /* display: none; */
 }
 
@@ -196,9 +215,10 @@ nav ul li a:hover {
 
 }
 .yelpList {
-  width: 90vw;
-  height: 90vh;
-  background: rgba(0, 0, 0, 0.5);
+  float: right;
+  position: relative;
+  width: 67vw;
+  height: 90%;
   display: grid;
   grid-template: auto/ auto auto;
   grid-gap: 20px;
@@ -206,14 +226,66 @@ nav ul li a:hover {
   box-sizing: content-box;
   margin: 0 auto;
   overflow: scroll;
+  border-top: black 2px solid;
+  border-bottom: black 2px solid;
+
 }
 .yelp {
-  height: 250px;
+  height: auto;
   background: white;
   box-sizing: content-box;
   padding: 5px;
+  border: black 2px solid;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
 
 }
+.location{
+  position: relative;
+  width: 29vw;
+  height: 100%;
+  float: left;
+  border-right: black .5vw solid;
+  background: rgba(255,255,255,.1 );
+  text-align: left;
+}
+.pickLocation, .join {
+  text-align: center;
+  width: 85%;
+  height: 25%;
+  border: black 1px solid;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 5px;
+  background: rgba(255,255,255,.8);
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
+}
+.pickLocation{
+  margin-top: 30%;
+  margin-bottom: 20%
+}
+
+.join button, .pickLocation button {
+  width: 125px;
+  height: 45px;
+  margin-top: 45px;
+  font-size: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+.join button:hover, .pickLocation button:hover {
+  top: 2px;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5);
+}
+.join button:active, .pickLocation button:active {
+  top: 5px;
+  box-shadow: none;
+}
+.pickLocation button{
+  font-size: 20px;
+}
+
+
 @media only screen and (max-width: 690px) {
   .menu {
     opacity: 1;
