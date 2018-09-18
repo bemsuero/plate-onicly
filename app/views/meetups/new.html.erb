@@ -1,32 +1,84 @@
-<% if @eat_area == nil %>
-<h2>Where area you like to eat?</h2>
-<%= form_tag(new_meetup_path, method: "get") %>
-<%= label_tag(:eat_area, "Enter Address") %><%= text_field_tag(:eat_area) %> <br>
-<%= submit_tag "Get Places!" %>
-<% else %>
-<div class="yelpList">
-<% @yelp_response["businesses"].each do |b| %>
-  <div class="grid-item yelp">
-    <p>Name:
-      <%= b['name']%></p>
-    <p>Address:
-      <%= b['location']['address1']%>,
-      <%= b['location']['city']%>,
-      <%= b['location']['zip_code']%></p>
-    <p>Price:
-      <%= b["price"] %></p>
-    <p>Rating:
-      <%= b["rating"] %></p>
-    <p>Reviews:
-      <%= @client.review(b["id"]).reviews[0].text %></p>
-      <%= form_for @meetup do |m| %>
-      <%= m.time_select :meet_time, start_hour: 8, end_hour: 20, minute_step: 30, include_day: false, include_year: false, include_month: false, required: true %> <br>
-      <%= m.date_select :meet_date, :order => [:month, :day, :year], start_year: (Time.now.year), required: true %><br>
-      <%= m.text_field :location, value: "#{b['location']['address1']}, #{b['location']['city']}, #{b['location']['zip_code']}", hidden: true, required: true %>
-      <%= m.text_field :location_name, value: "#{b['name']}", hidden: true, required: true %>
-      <%= m.submit %>
-      <%end%>
-  </div>
-<% end %>
+<div class="main">
+    <div class="headline">
+      <img src="/logo_transparent.png" alt="" class="logo">
+    </div>
+
+    <div class="toprest">
+      <div class="meetNew">
+        <% if @eat_area == nil %>
+        <h2>Where area you like to eat?</h2>
+        <%= form_tag(new_meetup_path, method: "get") %>
+        <%= label_tag(:eat_area, "Enter Address") %><%= text_field_tag(:eat_area) %> <br>
+        <%= submit_tag "Get Places!" %>
+        <% else %>
+        <h2>List</h2>
+        <div class="yelpList">
+        <% @yelp_response["businesses"].each do |b| %>
+          <div class="grid-item yelp">
+            <p>Name:
+              <%= b['name']%></p>
+            <p>Address:
+              <%= b['location']['address1']%>,
+              <%= b['location']['city']%>,
+              <%= b['location']['zip_code']%></p>
+            <p>Price:
+              <%= b["price"] %></p>
+            <p>Rating:
+              <%= b["rating"] %></p>
+            <p>Reviews:
+              <%= @client.review(b["id"]).reviews[0].text %></p>
+              <%= form_for @meetup do |m| %>
+              <%= m.time_select :meet_time, start_hour: 8, end_hour: 20, minute_step: 30, include_day: false, include_year: false, include_month: false, required: true %> <br>
+              <%= m.date_select :meet_date, :order => [:month, :day, :year], start_year: (Time.now.year), required: true %><br>
+              <%= m.text_field :location, value: "#{b['location']['address1']}, #{b['location']['city']}, #{b['location']['zip_code']}", hidden: true, required: true %>
+              <%= m.text_field :location_name, value: "#{b['name']}", hidden: true, required: true %>
+              <%= m.submit %>
+              <%end%>
+          </div>
+        <% end %>
+        </div>
+        <% end %>
+      </div>
+      <!-- <div class="landingGrid">
+        <div class="grid-item">
+          <div class="gridImg">
+            <div class="info"></div>
+            <h4>rest 2</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="gridImg">
+            <div class="info">
+            </div>
+            <h4>rest 2</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="gridImg">
+            <div class="info">
+            </div>
+            <h4>rest 2</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="gridImg">
+            <div class="info">
+            </div>
+            <h4>rest 2</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+
+    <div class="bottom">
+
+    </div>
 </div>
-<% end %>
