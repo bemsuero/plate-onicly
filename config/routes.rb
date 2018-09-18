@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'pages#landing'
+  root 'meetups#new'
 
   get "directions" => "meetups#directions"
 
@@ -9,13 +9,15 @@ Rails.application.routes.draw do
   delete 'sessions/logout' => 'sessions#destroy'
 
   resources :pages
-  
-  resources :users do
-  resources :meetups
-end
+
+#   resources :users do
+#   resources :meetups
+# end
 
 resources :meetups
 
+get "meetup/:slug" => "meetups#show"
+get "directions" => "meetups#directions"
 get "random_event" => "meetups#random"
 get "cancel_event" => "meetups#cancel"
 get "leave_event" => "meetups#leave"

@@ -1,11 +1,3 @@
-
-
-<h2>How to get there!</h2>
-<h3>Meetup At </h3>
-<%= form_tag("/directions", method: "get") %>
-From: <br>
-<%= label_tag(:house_number, "House Number") %><%= text_field_tag(:house_number)%><br>
-<%= label_tag(:address, "Address") %><%= text_field_tag(:address) %> <br>
-<%= label_tag(:city, "City") %><%= text_field_tag(:city) %> <br>
-<%= label_tag(:state, "State") %><%= text_field_tag(:state)%> <br>
-<%= submit_tag "Get Directions" %>
+Your meet up at <%= @meetup.location_name %>.
+<h2>For directions.</h2>
+<%= link_to "Directions!", directions_path %>
