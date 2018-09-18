@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'pages#landing'
+  root 'meetups#new'
 
   get "directions" => "meetups#directions"
 
