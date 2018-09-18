@@ -57,6 +57,7 @@ end
                             phone: params["meetup"]["phone"],
                             email: params["meetup"]["email"]) #create and validate is the correct way
       p "guest user created"
+      GuestUserMailer.confirmation_email(guest).deliver_now
       @meetup.guest_user_id = guest.id
       @meetup.generate_slug
       redirect_to("/meetup/#{@meetup.slug}")
@@ -83,9 +84,15 @@ end
   end
 
   def random
-    if @current_meetup != nil || @current_meetup_joined != nil
-      redirect_to root_path
-    else
+    if current_user == nil
+      all = Meetup.all
+      only_guest_meetup = all.where("slug").shuffle[0]
+      guest = GuestUser.create(name: params["meetup"]["name"],
+                            phone: params["meetup"]["phone"],
+                            email: params["meetup"]["email"])
+    only_guest_meetup.joiner_id = guest.id
+    redirect_to("/meetup/#{only_guest_meetup.slug}")
+  elsif
     random = User.all.ids.shuffle[0]
     current_meetup = Meetup.find_by(random.to_s)
     if current_meetup.user_two == nil && current_meetup.user_one != current_user.id
