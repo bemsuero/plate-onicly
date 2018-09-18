@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   resources :pages
 
+  resources :users
+  resources :meetups
+
+
 #   resources :users do
 #   resources :meetups
 # end

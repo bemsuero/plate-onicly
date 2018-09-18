@@ -22,7 +22,7 @@
     <p>Rating:
       <%= b["rating"] %></p>
     <p>Reviews:
-
+  <%= @client.review(b["id"]).reviews[0].text %></p>
       <%= form_for [@meetup] do |m| %>
       <% @location = b['location']['address1'] + " " + b['location']['city'] + " " + b['location']['zip_code'] %>
       <label for="meet_time">Meet Time: </label>
@@ -48,12 +48,13 @@
 
 <% if @eat_area == nil %>
 <h2>Where area you like to eat?</h2>
-<%= form_tag(new_user_meetup_path(current_user), method: "get") %>
+<%= form_tag(new_meetup_path, method: "get") %>
 <%= label_tag(:eat_area, "Enter Address") %><%= text_field_tag(:eat_area) %> <br>
 <%= submit_tag "Get Places!" %>
 <% else %>
+<div class="yelpList">
 <% @yelp_response["businesses"].each do |b| %>
-  <div class="">
+  <div class="grid-item yelp">
     <p>Name:
       <%= b['name']%></p>
     <p>Address:
@@ -74,8 +75,8 @@
       <%= m.submit %>
       <%end%>
   </div>
-  <hr>
 <% end %>
+</div>
 <% end %>
 
 <% end %>

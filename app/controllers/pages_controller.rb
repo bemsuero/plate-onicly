@@ -1,6 +1,11 @@
 class PagesController < ApplicationController
+  require 'net/http'
+  require 'uri'
+  require 'json'
+  require 'httparty'
+  require 'yelp/fusion'
   def landing
-    @user = User.new
+    
   end
 
   def home

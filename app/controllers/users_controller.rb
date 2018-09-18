@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   before_action :current_meetup, only: [:show, :directions, :cancel]
 
   def new
@@ -31,6 +32,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
   end
 
   def index
