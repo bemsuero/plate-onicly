@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   require 'httparty'
   require 'yelp/fusion'
   def landing
-    
+
   end
 
   def home

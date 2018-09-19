@@ -1,8 +1,9 @@
+<div class="zipcodeform", align="center">
 <% if @eat_area == nil %>
-<h2>Where area you like to eat?</h2>
-<%= form_tag(new_meetup_path, method: "get") %>
-<%= label_tag(:eat_area, "Enter Address") %><%= text_field_tag(:eat_area) %> <br>
-<%= submit_tag "Get Places!" %>
+<h2 class="question">Where area you like to eat?</h2>
+<%= form_tag(new_meetup_path, method: "get") %><br>
+<h2><%= label_tag(:eat_area, "Enter Address") %></h2><br><div class="address_box"><%= text_field_tag(:eat_area)%> </div><br>
+<%= submit_tag "Get Places!", class: "form_button"%>
 <% else %>
 <div class="yelpList">
 <% @yelp_response["businesses"].each do |b| %>
@@ -30,3 +31,4 @@
 <% end %>
 </div>
 <% end %>
+</div>
