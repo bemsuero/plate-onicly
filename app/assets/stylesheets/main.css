@@ -251,23 +251,29 @@ nav ul li a:hover {
 
 h3 {
   color: white;
-  font-size: 16px;
+  font-size: 10px;
   font: transparent;
+  margin: 0 0 -18px 0; 
 }
-
-h4 {
-  color: white;
-}
+ 
 
 .footer {
   width: 100vw;
-  height: 25vh;
-  background-color: black;
+  height: 6vh;
+  background-color: #4E403B;
 }
 
 
 .image-footer {
-    position: relative;
-    margin: -25px 350px 0px 431px;
-    width: 19vw;
+  position: relative;
+  margin: -91px 370px -37px 717px;
+  width: 6vw;
+}
+
+.social {
+  position: static;
+  color: white;
+  height: 0px;
+  width: 200px;
+  margin: -30px 1325px;
 }
