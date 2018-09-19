@@ -8,6 +8,7 @@
 <%= submit_tag "Get Places!" %>
 <% end %>
 
+<% if Meetup.find_by(joiner_id: nil) != nil %>
 <h3>Would you like to join a random lunch?</h3>
 <%= form_tag(random_event_path, method: "get") do %>
 <label for="meetup[name]">Your Name: </label>
@@ -18,7 +19,9 @@
 <input type="text" name="meetup[email]"> <br>
 <%= submit_tag "Join a random lunch!" %>
 <% end %>
-
+<%else%>
+<h3> No meetups you can join yet! Why don't you create one? </h3>
+<%end%>
 <% else %>
 <% @yelp_response["businesses"].each do |b| %>
   <div class="">
