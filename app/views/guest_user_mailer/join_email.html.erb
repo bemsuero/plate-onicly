@@ -1,5 +1,7 @@
-<h1 style="color:red;">Welcome to plateonicly, <%= @guest_user[:name] %></h1>
+<h1 style="color:red;">Your meetup is at <%= @email_info[:location_name] %></h1>
   <p>
-    You have successfully joined a meetup
+    You have successfully joined a meetup.<br>
+    Your meetup is at: <%= @email_info[:location] %><br>
+    It is taking place on <%= @email_info[:meet_date] %> at <%= @email_info[:meet_time].strftime("%I%M%p") %><br>
   </p>
 <p>Thanks for joining and have a great day!</p>
