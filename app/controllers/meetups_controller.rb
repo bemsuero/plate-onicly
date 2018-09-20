@@ -101,19 +101,15 @@ class MeetupsController < ApplicationController
 
     redirect_to("/meetup/#{only_guest_meetup.slug}")
   else
-    random = User.all.ids.shuffle[0]
-    # random = Meetup.all.length - 1
-    current_meetup = Meetup.find_by(random.to_s)
-    # meetups = Meetup.all.select{|meetup| meetup.user_one != nil}
-    # current_meetup = meetups.find(random)
-    # p meetups
-    p current_meetup
+    # random = User.all.ids.shuffle[0]
+    # current_meetup = Meetup.find_by(random.to_s)
+    random = Meetup.all.length - 1
+    meetups = Meetup.all.select{|meetup| meetup.user_one != nil}
+    current_meetup = meetups.find(random).each do |key,value|
+      [key,value]
+    end
     if (current_meetup.user_two == nil && current_meetup.user_one != current_user.id)
-      p "This is getting to non guest user random"
-      p current_meetup.user_two
-      p current_user.id
       current_meetup.user_two = current_user.id
-      p current_meetup.user_two
       current_meetup.save
       redirect_to current_user
     end # if (current_meetup.user_two == nil && current_meetup.user_one != current_user.id)
@@ -128,19 +124,19 @@ class MeetupsController < ApplicationController
   def leave
     @current_meetup_joined.user_two = nil
     @current_meetup_joined.save
-      redirect_to current_user
-    end
+    redirect_to current_user
+  end
 
     def directions
-    if current_user == nil
-    redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{session[:destination_address]}&travelmode=walking"
-    elsif @current_meetup != nil
-      redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup.location}&travelmode=walking"
-    elsif @current_meetup_joined != nil
-      redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup_joined.location}&travelmode=walking"
-    else
-      redirect_to current_user
-    end
+      if current_user == nil
+        redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{session[:destination_address]}&travelmode=walking"
+      elsif @current_meetup != nil
+        redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup.location}&travelmode=walking"
+      elsif @current_meetup_joined != nil
+        redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup_joined.location}&travelmode=walking"
+      else
+        redirect_to current_user
+      end
     end
 
   private
