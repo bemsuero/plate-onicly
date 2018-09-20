@@ -16,9 +16,9 @@
     <p>Price:
       <%= b["price"] %></p>
     <p>Rating:
-      <%= b["rating"] %></p>
+      <%= b["rating"] %></p> 
     <p>Reviews:
-      <%= @client.review(b["id"]).reviews[0].text %></p>
+      <%= @client.review(b["id"]).reviews[0].text %></p> 
       <%= form_for @meetup do |m| %>
       <%= m.time_select :meet_time, start_hour: 8, end_hour: 20, minute_step: 30, include_day: false, include_year: false, include_month: false, required: true %> <br>
       <%= m.date_select :meet_date, :order => [:month, :day, :year], start_year: (Time.now.year), required: true %><br>
