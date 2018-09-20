@@ -1,5 +1,5 @@
-<div class="zipcodeform", align="center">
 <% if @eat_area == nil %>
+<div class="zipcodeform", align="center">
 <h2 class="question">Where area you like to eat?</h2>
 <%= form_tag(new_meetup_path, method: "get") %><br>
 <h2><%= label_tag(:eat_area, "Enter Address") %></h2><br><div class="address_box"><%= text_field_tag(:eat_area)%> </div><br>
@@ -16,10 +16,15 @@
       <%= b['location']['zip_code']%></p>
     <p>Price:
       <%= b["price"] %></p>
+      <p>Reviews:
+        <%= @client.review(b["id"]).reviews[0].text %></p>
     <p>Rating:
-      <%= b["rating"] %></p>
-    <p>Reviews:
-      <%= @client.review(b["id"]).reviews[0].text %></p>
+      <!-- <%= b["rating"] %></p> -->
+      <% if b["rating"] != nil %>
+      <% b["rating"].to_i.times do %>
+      <img class="star" src="https://png.pngtree.com/svg/20170626/star_rating_425874.png" size="20px">
+     <% end %>
+
       <%= form_for @meetup do |m| %>
       <%= m.time_select :meet_time, start_hour: 8, end_hour: 20, minute_step: 30, include_day: false, include_year: false, include_month: false, required: true %> <br>
       <%= m.date_select :meet_date, :order => [:month, :day, :year], start_year: (Time.now.year), required: true %><br>
@@ -32,3 +37,4 @@
 </div>
 <% end %>
 </div>
+<% end %>

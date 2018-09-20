@@ -54,7 +54,11 @@ color: white;
   color: white;
 
 }
-
+/* ------rest list */
+.star {
+  width: 15px;
+  height: 15px;
+}
 
 
 body{
