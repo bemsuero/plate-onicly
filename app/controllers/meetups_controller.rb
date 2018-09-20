@@ -4,7 +4,7 @@ class MeetupsController < ApplicationController
   require 'json'
   require 'httparty'
   require 'yelp/fusion'
-  before_action :current_meetup, only: [:cancel, :leave]
+  before_action :current_meetup, only: [:cancel, :leave, :directions]
   before_action :current_meetup_slug, only: [:show, :directions]
 
   def new
