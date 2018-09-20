@@ -4,8 +4,8 @@ class MeetupsController < ApplicationController
   require 'json'
   require 'httparty'
   require 'yelp/fusion'
-  before_action :current_meetup, only: [:cancel, :leave, :directions]
-  before_action :current_meetup_slug, only: [:show, :directions]
+  before_action :current_meetup, only: [:cancel, :leave]
+  before_action :current_meetup_slug, only: [:show, :directio]
 
   def new
     if current_user == nil
@@ -135,8 +135,10 @@ class MeetupsController < ApplicationController
     if current_user == nil
     redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{session[:destination_address]}&travelmode=walking"
     elsif @current_meetup != nil
+      @current_meetup = Meetup.find_by(user_one: current_user.id)
       redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup.location}&travelmode=walking"
     elsif @current_meetup_joined != nil
+      @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
       redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup_joined.location}&travelmode=walking"
     else
       redirect_to current_user
@@ -150,7 +152,7 @@ class MeetupsController < ApplicationController
   end
 
   def current_meetup
-    @current_meetup = Meetup.find_by(user_one: current_user.id)
+@current_meetup = Meetup.find_by(user_one: current_user.id)
     @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
   end
 
