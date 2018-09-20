@@ -41,7 +41,7 @@ body{
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: url('/food.jpg');
+  background: url('/Food.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -60,7 +60,7 @@ header {
   left: 77%;
   font-size: 24px;
   transition: opacity ease 1.5s;
-  color: whited;
+  color: white;
 }
 .soon {
   position: absolute;

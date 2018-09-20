@@ -41,7 +41,7 @@ body{
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: url('/food.jpg');
+  background: url('/Food.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -60,7 +60,23 @@ header {
   left: 77%;
   font-size: 24px;
   transition: opacity ease 1.5s;
-  color: whited;
+  color: white;
+}
+.soon {
+  position: absolute;
+  color: red;
+  top: 0;
+  left: 0;
+  background: white;
+  border-radius: 0px 0px 15px 15px;
+  transition: opacity 1s ease;
+  opacity: 0;
+  border: red 2px solid;
+  border-top: none;
+}
+.soon:hover {
+  opacity: 1;
+  z-index: 2;
 }
 nav {
   position: relative;
@@ -139,7 +155,7 @@ nav ul li a:hover {
   grid-template: auto/ auto auto auto auto;
   grid-gap: 25px;
 }
-.landbox{
+.landbox, .about{
   float: right;
   position: relative;
   width: 70vw;
@@ -153,6 +169,9 @@ nav ul li a:hover {
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.8);
   letter-spacing: 1px;
 
+}
+.about {
+  float: none;
 }
 .grid-item{
   box-sizing: border-box;
