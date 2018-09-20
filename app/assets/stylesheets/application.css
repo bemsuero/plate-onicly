@@ -20,3 +20,377 @@
 .places {
   border: 1px black solid;
 }
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+h4  {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 3px;
+  border-bottom: black 1px solid;
+}
+p {
+  margin-bottom: 2px;
+}
+body{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: url('/food.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: 'Kanit', sans-serif;
+}
+header {
+  width: 100%;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 6px 2px rgba(0, 0, 0, 0.5);
+}
+.menu {
+  width:15%;
+  opacity: 0;
+  position: absolute;
+  left: 77%;
+  font-size: 24px;
+  transition: opacity ease 1.5s;
+  color: whited;
+}
+nav {
+  position: relative;
+  padding: 0 5px;
+
+}
+nav ul {
+  position: relative;
+  margin-left: 50%;
+  text-align: right;
+}
+
+nav ul li {
+  display: inline-block;
+  list-style-type: none;
+  position: relative;
+  text-align: center;
+  width: 75px;
+  margin-right: 10px;
+  font-size: 18px;
+  padding: 0 10px;
+  transition: border ease .5s;
+
+}
+nav ul li:hover {
+  border-top: #c7ea46 2px solid;
+  font-size: 16px;
+
+}
+nav ul li a {
+  color: rgba(255,255,255, 0.7);
+  font-weight: 100;
+}
+nav ul li a:hover {
+  color: rgba(255,255,255, 0.5);
+}
+
+.main {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  overflow: hidden;
+  border-bottom: black 3px solid;
+}
+
+.headline {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,.6);
+  text-align: center;
+}
+.logo {
+  position: relative;
+  margin-top:-10%;
+  width: 40vw;
+
+}
+.toprest{
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 100vw;
+  height: 90vh;
+  background: white;
+  box-shadow: 0 6px 2px rgba(0, 0, 0, 0.5);
+
+}
+.toprest h2 {
+  text-align: center;
+  margin: 10px 0 10px 0;
+  font-size: 50px;
+}
+.landingGrid{
+  margin-top: 20px;
+  display: grid;
+  grid-template: auto/ auto auto auto auto;
+  grid-gap: 25px;
+}
+.landbox{
+  float: right;
+  position: relative;
+  width: 70vw;
+  height: 80vh;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px;
+  color: white;
+  font-size: 17px;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+
+}
+.grid-item{
+  box-sizing: border-box;
+}
+.info{
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,.5);
+  opacity: 0;
+  transition: 1s ease;
+}
+
+.info:hover {
+  opacity: 1;
+}
+
+.grid-item h4{
+  margin: 5px 0;
+}
+.gridImg{
+  height: 300px;
+  text-align: center;
+  background: url('https://picsum.photos/200/300?random');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
+}
+
+
+.popup {
+  position: fixed;
+  top:25px;
+  width: 100vw;
+  height: 100vh;
+  background:rgba(255,0,0,.3) ;
+  z-index: 2;
+  overflow: hidden;
+  /* display: none; */
+}
+
+.signup {
+  width: 300px;
+  height: 90vh;
+  margin: 0 auto;
+  background: rgba(255,255,255, 0.9);
+  border: black 2px solid;
+  padding: 10px;
+  margin-top:25px;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  box-sizing: content-box;
+  overflow: scroll;
+
+}
+
+.signup input, .login input{
+  height: 25px;
+  width: 150px;
+}
+.signup .btn, .login .btn{
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  background: blue;
+  padding: 5px;
+}
+
+.login {
+  width: 300px;
+  height: 250px;
+  margin: 0 auto;
+  background: rgba(255,255,255, 0.9);
+  border: black 2px solid;
+  margin-top:25px;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.userHome {
+  width: 300px;
+  height: 300px;
+  background: rgba(0,0,0,.8);
+  border-radius: 0 0 20px 0;
+  color: white;
+
+
+}
+.yelpList {
+  float: right;
+  position: relative;
+  width: 67vw;
+  height: 90%;
+  display: grid;
+  grid-template: auto/ auto auto;
+  grid-gap: 20px;
+  padding: 20px;
+  box-sizing: content-box;
+  margin: 0 auto;
+  overflow: scroll;
+  border-top: black 2px solid;
+  border-bottom: black 2px solid;
+
+}
+.yelp {
+  height: auto;
+  position: relative;
+  background: white;
+  box-sizing: content-box;
+  padding: 5px;
+  border: black 2px solid;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  border-radius: 10px;
+
+
+
+}
+.location{
+  position: relative;
+  width: 29vw;
+  height: 100%;
+  float: left;
+  border-right: black .5vw solid;
+  background: rgba(255,255,255,.1 );
+  text-align: left;
+}
+.pickLocation, .join ,.meetup{
+  position: relative;
+  text-align: center;
+  width: 85%;
+  height: 30%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: white;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  text-align: left;
+  padding: 2%;
+}
+.pickLocation{
+  margin-top: 7%;
+  margin-bottom: 20%
+}
+
+.meetup {
+  width: 40%;
+  padding: .75%;
+  margin-top: 50;
+}
+
+.form_button {
+  height: 35px;
+  width: 96%;
+  font-size: 20px;
+  background: #4E403B;
+  border-radius: 10px;
+  color: white;
+  position: absolute;
+  border-top: 0;
+  text-align: center;
+  bottom: 10px;
+  outline: none;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.7);
+}
+.form_button:hover {
+  opacity: .8;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.7);
+  bottom: 8px;
+}
+.form_button:active {
+  box-shadow: none;
+  bottom: 5px;
+}
+
+input {
+  width: inherit;
+  border: none;
+  border-bottom: black 1px solid;
+  outline: none;
+
+}
+.question {
+  position: relative;
+  padding-right: 20px;
+  background-color: #c7ea46;
+  border-radius: 10px;
+  color: white;
+  width: auto;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+span {
+  padding: 0 5px;
+  font-size: 20px;
+  background-color: #c7ea46;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px 0 0 10px;
+
+}
+@media only screen and (max-width: 690px) {
+  .menu {
+    opacity: 1;
+    z-index: 2;
+  }
+  nav ul  {
+    top: 30px;
+    left: 20vw;
+    position: absolute;
+    z-index: 1;
+
+  }
+  nav ul li {
+    display: block;
+    height: 40px;
+    width: 100px;
+    padding: 0 5px;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    }
+
+    nav ul li:hover {
+      border-top: none;
+    }
+    .toprest{
+      height: auto;
+    }
+    .landingGrid {
+      grid-template: auto/auto;
+      grid-gap: 25px;
+    }
+    .logo {
+      position: relative;
+      margin-top:0;
+      width: 60vw;
+    }
+}
