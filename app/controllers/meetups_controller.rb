@@ -131,11 +131,9 @@ class MeetupsController < ApplicationController
     def directions
     if current_user == nil
     redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{session[:destination_address]}&travelmode=walking"
-    @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
-    @current_meetup = Meetup.find_by(user_one: current_user.id)
-    elsif @current_meetup != nil
+    elsif Meetup.find_by(user_one: current_user.id) != nil
       redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup.location}&travelmode=walking"
-    elsif @current_meetup_joined != nil
+    elsif Meetup.find_by(user_two: current_user.id) != nil
       redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup_joined.location}&travelmode=walking"
     else
       p @current_meetup
