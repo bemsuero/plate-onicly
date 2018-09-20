@@ -11,32 +11,27 @@ class MeetupsController < ApplicationController
     if current_user == nil
       @eat_area = params[:eat_area]
       session[:location] = @eat_area
-    unless @eat_area != nil
+      unless @eat_area != nil
     else
+      @meetup = Meetup.new
+      @client = Yelp::Fusion::Client.new("z_VWpGhFnlmF-o3D4Q9WOaKJn8UxTPjZkA6ntFoNyoXegUVTtw1L9vOT2o9EDOJo369oYIood2H34v80V03ZVTqEJmW9u2vMPXXLbpeXaMG_aF0hjNI_6F-Vd0ehW3Yx")
+      @results = @client.search("#{@eat_area}", term: 'restaurants')
+      @yelp_response = JSON.parse(@results.to_json)
+    end
+    elsif
+      @eat_area = params[:eat_area]
+      session[:location] = @eat_area
+      if @eat_area == nil
+      else
+        @user = current_user
         @meetup = Meetup.new
         @client = Yelp::Fusion::Client.new("z_VWpGhFnlmF-o3D4Q9WOaKJn8UxTPjZkA6ntFoNyoXegUVTtw1L9vOT2o9EDOJo369oYIood2H34v80V03ZVTqEJmW9u2vMPXXLbpeXaMG_aF0hjNI_6F-Vd0ehW3Yx")
         @results = @client.search("#{@eat_area}", term: 'restaurants')
         @yelp_response = JSON.parse(@results.to_json)
-end
-elsif
-    @eat_area = params[:eat_area]
-    session[:location] = @eat_area
-  if @eat_area == nil
-    else
-    @user = current_user
-    @meetup = Meetup.new
-    @client = Yelp::Fusion::Client.new("z_VWpGhFnlmF-o3D4Q9WOaKJn8UxTPjZkA6ntFoNyoXegUVTtw1L9vOT2o9EDOJo369oYIood2H34v80V03ZVTqEJmW9u2vMPXXLbpeXaMG_aF0hjNI_6F-Vd0ehW3Yx")
-    @results = @client.search("#{@eat_area}", term: 'restaurants')
-    @yelp_response = JSON.parse(@results.to_json)
-  end
-  end
-end
-    # elsif @current_meetup != nil || @current_meetup_joined != nil
-    #   redirect_to root_path
+        end
+      end
+     end
 
-  #     end
-  # end
-  # end
 
   def create
     if current_user == nil
