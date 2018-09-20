@@ -56,16 +56,18 @@ class MeetupsController < ApplicationController
       @meetup.guest_user_id = guest.id
       @meetup.generate_slug
       redirect_to("/meetup/#{@meetup.slug}")
-    # elsif
-    # @meetup = Meetup.new(meetup_params)
-    # @meetup.user_one = current_user.id
-    #     redirect_to current_user
+      end
     else
-      p @meetup.errors.messages
-      p "creating guest user failed"
-      render "new"
+    @meetup = Meetup.new(meetup_params)
+    @meetup.user_one = current_user.id
+    @meetup.guest_user = GuestUser.new # This is a workaround for the rollback transaction
+    p "Meetup Creation Debugging"
+    p @meetup.errors.messages # Ted added this
+    @meetup.save
+    p "Error Debugging"
+    p @meetup.errors.messages # Ted added this
+    redirect_to current_user
     end
-  end
   end
 
   def edit
@@ -139,8 +141,8 @@ class MeetupsController < ApplicationController
   end
 
   def current_meetup
-    # @current_meetup = Meetup.find_by(user_one: current_user.id)
-    # @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
+    @current_meetup = Meetup.find_by(user_one: current_user.id)
+    @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
   end
 
   def current_meetup_slug
