@@ -286,7 +286,7 @@ nav ul li a:hover {
   box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
   text-align: left;
   border-radius: 10px;
-  background-image: radial-gradient(rgba(255,255,224), white), url("/menu.jpg");
+  background-image: radial-gradient(rgb(255,255,224), white), url("/menu.jpg");
     background-position: center;
 
 
