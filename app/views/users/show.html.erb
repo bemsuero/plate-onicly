@@ -18,7 +18,7 @@
       <%= link_to "Create Event", new_user_meetup_path(current_user) %>
       <br>
     <% end %>
-    <% if @current_meetup == nil and @current_meetup_joined == nil and Meetup.all.find_by(user_one: nil) == false %>
+    <% if @current_meetup == nil and @current_meetup_joined == nil %>
       <%= link_to "Join Random Event", random_event_path %><br>
     <% end %>
 

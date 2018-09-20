@@ -5,7 +5,7 @@ class MeetupsController < ApplicationController
   require 'httparty'
   require 'yelp/fusion'
   before_action :current_meetup, only: [:cancel, :leave]
-  before_action :current_meetup_slug, only: [:show, :directio]
+  before_action :current_meetup_slug, only: [:show, :directions]
 
   def new
     if current_user == nil
@@ -83,6 +83,7 @@ class MeetupsController < ApplicationController
   def random
     if current_user == nil
       all = Meetup.all
+      p "STUFF"
       only_guest_meetup = all.where(joiner_id: nil).shuffle[0]
       guest = GuestUser.create(name: params["meetup"]["name"],
                             phone: params["meetup"]["phone"],
@@ -101,24 +102,20 @@ class MeetupsController < ApplicationController
 
     redirect_to("/meetup/#{only_guest_meetup.slug}")
   else
-    random = User.all.ids.shuffle[0]
-    # random = Meetup.all.length - 1
-    current_meetup = Meetup.find_by(random.to_s)
-    # meetups = Meetup.all.select{|meetup| meetup.user_one != nil}
-    # current_meetup = meetups.find(random)
-    # p meetups
-    p current_meetup
-    if (current_meetup.user_two == nil && current_meetup.user_one != current_user.id)
-      p "This is getting to non guest user random"
-      p current_meetup.user_two
-      p current_user.id
-      current_meetup.user_two = current_user.id
-      p current_meetup.user_two
-      current_meetup.save
-      redirect_to current_user
-    end # if (current_meetup.user_two == nil && current_meetup.user_one != current_user.id)
-  end
-  end
+     # random = User.all.ids.shuffle[0]
+     # current_meetup = Meetup.find_by(random.to_s)
+     random = Meetup.all.length - 1
+     meetups = Meetup.all.select{|meetup| meetup.user_one != nil}
+     current_meetup = meetups.find(random).each do |key,value|
+       [key,value]
+     end
+     if (current_meetup.user_two == nil && current_meetup.user_one != current_user.id)
+       current_meetup.user_two = current_user.id
+       current_meetup.save
+       redirect_to current_user
+     end # if (current_meetup.user_two == nil && current_meetup.user_one != current_user.id)
+   end
+   end
 
   def cancel
     @current_meetup.destroy
@@ -132,15 +129,17 @@ class MeetupsController < ApplicationController
     end
 
     def directions
+      @current_meetup = Meetup.find_by(user_one: current_user.id)
+      @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
     if current_user == nil
     redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{session[:destination_address]}&travelmode=walking"
     elsif @current_meetup != nil
-      @current_meetup = Meetup.find_by(user_one: current_user.id)
       redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup.location}&travelmode=walking"
     elsif @current_meetup_joined != nil
-      @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
       redirect_to "https://www.google.com/maps/dir/?api=1&origin=#{session[:location]}&destination=#{@current_meetup_joined.location}&travelmode=walking"
     else
+      p @current_meetup
+      p @current_meetup_joined
       redirect_to current_user
     end
     end
@@ -152,7 +151,7 @@ class MeetupsController < ApplicationController
   end
 
   def current_meetup
-@current_meetup = Meetup.find_by(user_one: current_user.id)
+    @current_meetup = Meetup.find_by(user_one: current_user.id)
     @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
   end
 
