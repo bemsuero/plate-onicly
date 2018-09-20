@@ -52,7 +52,11 @@
           <p> <span>Price:</span>
             <%= b["price"] %></p>
           <p><span>Rating:</span>
-            <%= b["rating"] %></p>
+            <% if b["rating"] != nil %>
+            <% b["rating"].to_i.times do %>
+          <img class="star" src="https://png.pngtree.com/svg/20170626/star_rating_425874.png" size="20px">
+          <% end %>
+          <% end %>
           <p><span>Reviews:</span>
             <%= @client.review(b["id"]).reviews[0].text %></p>
             <hr>
@@ -129,7 +133,11 @@
         <p>Price:
           <%= b["price"] %></p>
         <p>Rating:
-          <%= b["rating"] %></p>
+          <% if b["rating"] != nil %>
+          <% b["rating"].to_i.times do %>
+          <img class="star" src="https://png.pngtree.com/svg/20170626/star_rating_425874.png" size="20px">
+          <% end %>
+          <% end %>
         <p>Reviews:
           <%= @client.review(b["id"]).reviews[0].text %></p>
         <%= form_for @meetup do |m| %>

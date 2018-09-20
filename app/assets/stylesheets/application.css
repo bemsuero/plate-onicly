@@ -393,6 +393,12 @@ span {
   padding-top: 3%;
 }
 
+.star {
+  width: 15px;
+  height: 15px;
+}
+
+
 @media only screen and (max-width: 690px) {
   .menu {
     opacity: 1;
