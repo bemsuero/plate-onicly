@@ -1,7 +1,8 @@
 <div class="userHome">
 
 <% if logged_in? %>
-  <h1>Welcome <%= @user.first_name %> <%= @user.last_name %> User#: <%= current_user.id %> <br></h1>
+  <h2>Welcome <%= @user.first_name %> <%= @user.last_name %> User#: <%= current_user.id %> </h2>
+  <h3>Your Interests:</h3>
   <% @user.interests.each do |interest| %>
     <%= interest.name %><br>
   <% end %><br>
@@ -32,5 +33,5 @@
 </div>
 
 <div class="">
-  
+
 </div>
