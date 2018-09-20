@@ -5,15 +5,15 @@
       <% if current_user == nil %>
         <div class="pickLocation">
           <%= form_tag(new_meetup_path, method: "get") do %>
-          <h3>where would you like to eat?</h3>
+          <h3 class="question">where would you like to eat?</h3>
           <%= label_tag(:eat_area, "Enter Address: ") %><%= text_field_tag(:eat_area) %>
           <br>
-          <%= submit_tag "Get Places!" %>
+          <%= button_tag "Get Places!", class: 'form_button' %>
         <% end %>
       </div>
       <div class="join">
         <% if Meetup.find_by(joiner_id: nil) != nil %>
-          <h3>Would you like to join a random lunch?</h3>
+          <h3 class="question">Would you like to join a random lunch?</h3>
           <%= form_tag(random_event_path, method: "get") do %>
           <label for="meetup[name]">Your Name:
           </label>
@@ -27,32 +27,34 @@
           </label>
           <input type="text" name="meetup[email]">
           <br>
-          <%= submit_tag "Join a random lunch!" %>
+          <%= button_tag "Join!", class: 'form_button' %>
         <% end %>
       </div>
     <%else%>
-      <h3>
+      <h3 class="question">
         No meetups you can join yet! Why don't you create one?
       </h3>
     <%end%>
   </div>
+
   <!---location end--->
   <% if @eat_area != nil %>
     <div class="yelpList">
       <% @yelp_response["businesses"].each do |b| %>
         <div class="grid-item yelp">
-          <p>Name:
-            <%= b['name']%></p>
-          <p>Address:
+          <h4>
+            <%= b['name']%></h4>
+          <p> <span class="label">Address:</span>
             <%= b['location']['address1']%>,
             <%= b['location']['city']%>,
             <%= b['location']['zip_code']%></p>
-          <p>Price:
+          <p> <span>Price:</span>
             <%= b["price"] %></p>
-          <p>Rating:
+          <p><span>Rating:</span>
             <%= b["rating"] %></p>
-          <p>Reviews:
+          <p><span>Reviews:</span>
             <%= @client.review(b["id"]).reviews[0].text %></p>
+            <hr>
           <%= form_for [@meetup] do |m| %>
           <% @location = b['location']['address1'] + " " + b['location']['city'] + " " + b['location']['zip_code'] %>
             <label for="meet_time">Meet Time:
@@ -79,7 +81,7 @@
             <br>
             <input type="text" name="location_name" value="<%= b['name'] %>" hidden="hidden" required="required">
             <br>
-            <%= m.submit %>
+            <input type="submit" name="" value="Create meetup" class="form_button">
           <%end%>
         </div>
       <%end%>
@@ -136,6 +138,7 @@
       <%end%>
     </div>
   <% end %>
+</div>
 </div>
 <% else %>
 <div class="landbox">
