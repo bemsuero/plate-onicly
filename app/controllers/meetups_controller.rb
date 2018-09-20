@@ -4,7 +4,7 @@ class MeetupsController < ApplicationController
   require 'json'
   require 'httparty'
   require 'yelp/fusion'
-  before_action :current_meetup, only: [:cancel, :leave]
+  before_action :current_meetup, only: [:cancel, :leave, :directions]
   before_action :current_meetup_slug, only: [:show, :directions]
 
   def new
@@ -56,16 +56,18 @@ class MeetupsController < ApplicationController
       @meetup.guest_user_id = guest.id
       @meetup.generate_slug
       redirect_to("/meetup/#{@meetup.slug}")
-    # elsif
-    # @meetup = Meetup.new(meetup_params)
-    # @meetup.user_one = current_user.id
-    #     redirect_to current_user
+      end
     else
-      p @meetup.errors.messages
-      p "creating guest user failed"
-      render "new"
+    @meetup = Meetup.new(meetup_params)
+    @meetup.user_one = current_user.id
+    @meetup.guest_user = GuestUser.new # This is a workaround for the rollback transaction
+    p "Meetup Creation Debugging"
+    p @meetup.errors.messages # Ted added this
+    @meetup.save
+    p "Error Debugging"
+    p @meetup.errors.messages # Ted added this
+    redirect_to current_user
     end
-  end
   end
 
   def edit
@@ -100,12 +102,21 @@ class MeetupsController < ApplicationController
     redirect_to("/meetup/#{only_guest_meetup.slug}")
   else
     random = User.all.ids.shuffle[0]
+    # random = Meetup.all.length - 1
     current_meetup = Meetup.find_by(random.to_s)
-    if current_meetup.user_two == nil && current_meetup.user_one != current_user.id
-    current_meetup.user_two = current_user.id
-    current_meetup.save
-    redirect_to current_user
-  end
+    # meetups = Meetup.all.select{|meetup| meetup.user_one != nil}
+    # current_meetup = meetups.find(random)
+    # p meetups
+    p current_meetup
+    if (current_meetup.user_two == nil && current_meetup.user_one != current_user.id)
+      p "This is getting to non guest user random"
+      p current_meetup.user_two
+      p current_user.id
+      current_meetup.user_two = current_user.id
+      p current_meetup.user_two
+      current_meetup.save
+      redirect_to current_user
+    end # if (current_meetup.user_two == nil && current_meetup.user_one != current_user.id)
   end
   end
 
@@ -139,8 +150,8 @@ class MeetupsController < ApplicationController
   end
 
   def current_meetup
-    # @current_meetup = Meetup.find_by(user_one: current_user.id)
-    # @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
+    @current_meetup = Meetup.find_by(user_one: current_user.id)
+    @current_meetup_joined = Meetup.find_by(user_two: current_user.id)
   end
 
   def current_meetup_slug

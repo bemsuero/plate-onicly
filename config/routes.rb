@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   resources :meetups
 
 
-#   resources :users do
-#   resources :meetups
-# end
+  resources :users do
+  resources :meetups
+end
 
 resources :meetups
 
