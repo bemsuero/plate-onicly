@@ -5,7 +5,7 @@
 body{
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   background: url('/food.jpg');
   background-repeat: no-repeat;
   background-position: center;
@@ -70,7 +70,7 @@ nav ul li a:hover {
   width: 100vw;
   height: 100vh;
   position: absolute;
-  overflow: hidden;
+  overflow: auto;
   border-bottom: black 3px solid;
 }
 
@@ -162,7 +162,7 @@ nav ul li a:hover {
   height: 100vh;
   background:rgba(255,0,0,.3) ;
   z-index: 2;
-  overflow: hidden;
+  overflow: auto;
   /* display: none; */
 }
 
