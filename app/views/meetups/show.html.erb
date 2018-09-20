@@ -1,3 +1,5 @@
-Your meet up at <%= @meetup.location_name %>.
-<h2>For directions.</h2>
-<%= link_to "Directions!", directions_path %>
+<div class="meetup">
+  <h3> Your meet up at <%= @meetup.location_name %>. </h3>
+  <h2>For directions.</h2>
+  <button type="button" name="button" class="form_button"> <%= link_to "Directions!", directions_path , target: '_blank'%></button>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_18_155835) do
+ActiveRecord::Schema.define(version: 2018_09_18_201711) do
 
   create_table "guest_users", force: :cascade do |t|
     t.string "name"
@@ -48,10 +48,10 @@ ActiveRecord::Schema.define(version: 2018_09_18_155835) do
     t.time "meet_time"
     t.string "location"
     t.integer "guest_user_id"
-    t.integer "joiner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.integer "joiner_id"
     t.index ["slug"], name: "index_meetups_on_slug", unique: true
   end
 

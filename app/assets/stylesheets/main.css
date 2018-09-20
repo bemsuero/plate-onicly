@@ -2,6 +2,19 @@
   margin: 0;
   padding: 0;
 }
+a {
+  text-decoration: none;
+  color: white;
+}
+h4  {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 3px;
+  border-bottom: black 1px solid;
+}
+p {
+  margin-bottom: 2px;
+}
 body{
   width: 100vw;
   height: 100vh;
@@ -10,15 +23,13 @@ body{
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Kanit', sans-serif;
 }
 header {
   width: 100%;
   height: 25px;
   background: rgba(0, 0, 0, 0.9);
   box-shadow: 0 6px 2px rgba(0, 0, 0, 0.5);
-
-
 }
 .menu {
   width:15%;
@@ -53,12 +64,11 @@ nav ul li {
 
 }
 nav ul li:hover {
-  border-top: rgba(255,255,255, 0.7) 2px solid;
+  border-top: #c7ea46 2px solid;
   font-size: 16px;
 
 }
 nav ul li a {
-  text-decoration: none;
   color: rgba(255,255,255, 0.7);
   font-weight: 100;
 }
@@ -149,11 +159,7 @@ nav ul li a:hover {
   background-size: cover;
   box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
 }
-.bottom {
-  width: 100vw;
-  height: 25vh;
-  background: rgba(0,0,0,.6);
-}
+
 
 .popup {
   position: fixed;
@@ -232,11 +238,16 @@ nav ul li a:hover {
 }
 .yelp {
   height: auto;
+  position: relative;
   background: white;
   box-sizing: content-box;
   padding: 5px;
   border: black 2px solid;
   box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  border-radius: 10px;
+
+
 
 }
 .location{
@@ -248,44 +259,81 @@ nav ul li a:hover {
   background: rgba(255,255,255,.1 );
   text-align: left;
 }
-.pickLocation, .join {
+.pickLocation, .join ,.meetup{
+  position: relative;
   text-align: center;
   width: 85%;
-  height: 25%;
-  border: black 1px solid;
+  height: 30%;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 5px;
-  background: rgba(255,255,255,.8);
+  background: white;
   box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  text-align: left;
+  padding: 2%;
 }
 .pickLocation{
-  margin-top: 30%;
+  margin-top: 7%;
   margin-bottom: 20%
 }
 
-.join button, .pickLocation button {
-  width: 125px;
-  height: 45px;
-  margin-top: 45px;
-  font-size: 25px;
-  border-radius: 10px;
-  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
-  outline: none;
+.meetup {
+  width: 40%;
+  padding: .75%;
+  margin-top: 50;
 }
-.join button:hover, .pickLocation button:hover {
-  top: 2px;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5);
-}
-.join button:active, .pickLocation button:active {
-  top: 5px;
-  box-shadow: none;
-}
-.pickLocation button{
+
+.form_button {
+  height: 35px;
+  width: 96%;
   font-size: 20px;
+  background: #4E403B;
+  border-radius: 10px;
+  color: white;
+  position: absolute;
+  border-top: 0;
+  bottom: 10px;
+  outline: none;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.7);
+}
+.form_button:hover {
+  opacity: .8;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.7);
+  bottom: 8px;
+}
+.form_button:active {
+  box-shadow: none;
+  bottom: 5px;
 }
 
+input {
+  width: inherit;
+  border: none;
+  border-bottom: black 1px solid;
+  outline: none;
 
+}
+.question {
+  position: relative;
+  padding-right: 20px;
+  background-color: #c7ea46;
+  border-radius: 10px;
+  color: white;
+  width: auto;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+span {
+  padding: 0 5px;
+  font-size: 20px;
+  background-color: #c7ea46;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px 0 0 10px;
+
+}
 @media only screen and (max-width: 690px) {
   .menu {
     opacity: 1;

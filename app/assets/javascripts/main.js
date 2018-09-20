@@ -3,11 +3,7 @@ $( document ).ready(function() {
     $('.login').hide();
     $('.signup').hide();
     $('.location').hide();
-    $('.pickLocation').hide();
-    $('.join').hide();
-    $('.pickLocation').slideDown(2000);
-    $('.join').slideDown(2000);
-    $('.location').fadeIn(1000);
+    $('.location').fadeIn(2000);
 
     $( ".signupNav" ).click(function() {
       $('.signup').fadeToggle(1000);
