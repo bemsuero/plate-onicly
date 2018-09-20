@@ -89,18 +89,23 @@ end
       only_guest_meetup = all.where("slug").shuffle[0]
       loop do
         only_guest_meetup = all.where("slug").shuffle[0]
-        p only_guest_meetup
-        p all.where("slug")
         if only_guest_meetup.joiner_id == nil
           guest = GuestUser.create(name: params["meetup"]["name"],
                             phone: params["meetup"]["phone"],
                             email: params["meetup"]["email"])
-          only_guest_meetup.joiner_id = 1
-          only_guest_meetup.save
+    only_guest_meetup.joiner_id = guest.id
+    only_guest_meetup.save
+    joining_user = GuestUser.find(only_guest_meetup.joiner_id)
+    creator_user = GuestUser.find(only_guest_meetup.guest_user_id)
+
+    creator_emailinfo = {:email => creator_user.email,:location => only_guest_meetup.location,:meet_time => only_guest_meetup.meet_time,:meet_date => only_guest_meetup.meet_date,:location_name => only_guest_meetup.location_name}
+    joiner_emailinfo = {:email => joining_user.email,:location => only_guest_meetup.location,:meet_time => only_guest_meetup.meet_time,:meet_date => only_guest_meetup.meet_date,:location_name => only_guest_meetup.location_name}
+
+    GuestUserMailer.join_email(creator_emailinfo).deliver_now
+    GuestUserMailer.join_email(joiner_emailinfo).deliver_now
+      
           break
         end
-        p "this worked created user"
-          p all.where("slug")
           redirect_to("/meetup/#{only_guest_meetup.slug}") and return
   # if current_user != nil
   #   random = User.all.ids.shuffle[0]
