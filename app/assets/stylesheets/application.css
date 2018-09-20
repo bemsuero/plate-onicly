@@ -381,7 +381,7 @@ span {
 .footer {
   position: absolute;
   width: 90vw;
-  bottom: 2%;
+  bottom: 0;
   height: 7vh;
   padding-left: 10%;
   margin-left: 0;
