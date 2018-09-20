@@ -7,15 +7,21 @@
     <% if logged_in? %>
       <li><%= link_to("Log out",sessions_logout_path,method: :delete, data: {confirm: 'Are you sure?'}) %></li>
     <% else %>
-      <li class="signupNav"></div>
+      <li class="signupNav">
+        <div class="soon">
+          <p>Coming Soon!</p>
+        </div>
       <a href="#">Sign up</a>
     </li>
-    <li class="loginNav"></div>
+    <li class="loginNav">
+      <div class="soon">
+        <p>Coming Soon!</p>
+      </div>
     <a href="#">Log in</a>
   </li>
 <% end %>
 <li>
-  <a href="#">About</a>
+  <a href="/about">About</a>
 </li>
 </ul>
 </nav>
