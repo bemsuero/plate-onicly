@@ -1,86 +1,106 @@
-<% if current_user == nil %>
+<div class="main">
+  <div class="headline">
+    <div class="location">
 
-  <% if @eat_area == nil %>
-    <%= form_tag(new_meetup_path, method: "get") do %>
-    <h3>where would you like to eat?</h3>
-    <%= label_tag(:eat_area, "Enter Address: ") %><%= text_field_tag(:eat_area) %>
-    <br>
-    <%= submit_tag "Get Places!" %>
-  <% end %>
-
-  <% if Meetup.find_by(joiner_id: nil) != nil %>
-    <h3>Would you like to join a random lunch?</h3>
-    <%= form_tag(random_event_path, method: "get") do %>
-    <label for="meetup[name]">Your Name:
-    </label>
-    <input type="text" name="meetup[name]">
-    <br>
-    <label for="meetup[phone]">Your Phone Number:
-    </label>
-    <input type="text" name="meetup[phone]">
-    <br>
-    <label for="meetup[email]">Email Address:
-    </label>
-    <input type="text" name="meetup[email]">
-    <br>
-    <%= submit_tag "Join a random lunch!" %>
-  <% end %>
-<%else%>
-  <h3>
-    No meetups you can join yet! Why don't you create one?
-  </h3>
-<%end%>
-<% else %>
-<% @yelp_response["businesses"].each do |b| %>
-  <div class="">
-    <p>Name:
-      <%= b['name']%></p>
-    <p>Address:
-      <%= b['location']['address1']%>,
-      <%= b['location']['city']%>,
-      <%= b['location']['zip_code']%></p>
-    <p>Price:
-      <%= b["price"] %></p>
-    <p>Rating:
-      <%= b["rating"] %></p>
-    <p>Reviews:
-      <%= @client.review(b["id"]).reviews[0].text %></p>
-    <%= form_for [@meetup] do |m| %>
-    <% @location = b['location']['address1'] + " " + b['location']['city'] + " " + b['location']['zip_code'] %>
-      <label for="meet_time">Meet Time:
-      </label>
-      <input type="time" name="meet_time" required="required">
-      <br>
-      <label for="meet_date">Meet Date:
-      </label>
-      <input type="date" name="meet_date" required="required">
-      <br>
-      <label for="meetup[name]">Your Name:
-      </label>
-      <input type="text" name="meetup[name]" required="required">
-      <br>
-      <label for="meetup[phone]">Your Phone Number:
-      </label>
-      <input type="text" name="meetup[phone]" required="required">
-      <br>
-      <label for="meetup[email]">Email Address:
-      </label>
-      <input type="text" name="meetup[email]" required="required">
-      <br>
-      <input type="text" name="location" value="<%= @location %>" hidden="hidden" required="required">
-      <br>
-      <input type="text" name="location_name" value="<%= b['name'] %>" hidden="hidden" required="required">
-      <br>
-      <%= m.submit %>
+      <% if current_user == nil %>
+        <div class="pickLocation">
+          <%= form_tag(new_meetup_path, method: "get") do %>
+          <h3 class="question">where would you like to eat?</h3>
+          <%= label_tag(:eat_area, "Enter Address: ") %><%= text_field_tag(:eat_area) %>
+          <br>
+          <%= button_tag "Get Places!", class: 'form_button' %>
+        <% end %>
+      </div>
+      <div class="join">
+        <% if Meetup.find_by(joiner_id: nil) != nil %>
+          <h3 class="question">Would you like to join a random lunch?</h3>
+          <%= form_tag(random_event_path, method: "get") do %>
+          <label for="meetup[name]">Your Name:
+          </label>
+          <input type="text" name="meetup[name]">
+          <br>
+          <label for="meetup[phone]">Your Phone Number:
+          </label>
+          <input type="text" name="meetup[phone]">
+          <br>
+          <label for="meetup[email]">Email Address:
+          </label>
+          <input type="text" name="meetup[email]">
+          <br>
+          <%= button_tag "Join!", class: 'form_button' %>
+        <% end %>
+      </div>
+    <%else%>
+      <h3 class="question">
+        No meetups you can join yet! Why don't you create one?
+      </h3>
     <%end%>
   </div>
-  <hr>
-<% end %>
-<% end %>
+  </div>
 
+  <!---location end--->
+  <% if @eat_area != nil %>
+    <div class="yelpList">
+      <% @yelp_response["businesses"].each do |b| %>
+        <div class="grid-item yelp">
+          <h4>
+            <%= b['name']%></h4>
+          <p> <span class="label">Address:</span>
+            <%= b['location']['address1']%>,
+            <%= b['location']['city']%>,
+            <%= b['location']['zip_code']%></p>
+          <p> <span>Price:</span>
+            <%= b["price"] %></p>
+          <p><span>Rating:</span>
+            <% if b["rating"] != nil %>
+            <% b["rating"].to_i.times do %>
+          <img class="star" src="https://png.pngtree.com/svg/20170626/star_rating_425874.png" size="20px">
+          <% end %>
+          <% end %>
+          <p><span>Reviews:</span>
+            <%= @client.review(b["id"]).reviews[0].text %></p>
+            <hr>
+          <%= form_for [@meetup] do |m| %>
+          <% @location = b['location']['address1'] + " " + b['location']['city'] + " " + b['location']['zip_code'] %>
+            <label for="meet_time">Meet Time:
+            </label>
+            <input type="time" name="meet_time" required="required">
+            <br>
+            <label for="meet_date">Meet Date:
+            </label>
+            <input type="date" name="meet_date" required="required">
+            <br>
+            <label for="meetup[name]">Your Name:
+            </label>
+            <input type="text" name="meetup[name]" required="required">
+            <br>
+            <label for="meetup[phone]">Your Phone Number:
+            </label>
+            <input type="text" name="meetup[phone]" required="required">
+            <br>
+            <label for="meetup[email]">Email Address:
+            </label>
+            <input type="text" name="meetup[email]" required="required">
+            <br>
+            <input type="text" name="location" value="<%= @location %>" hidden="hidden" required="required">
+            <br>
+            <input type="text" name="location_name" value="<%= b['name'] %>" hidden="hidden" required="required">
+            <br>
+            <input type="submit" name="" value="Create meetup" class="form_button">
+          <%end%>
+        </div>
+      <%end%>
+    </div>
+<%else%>
+  <div class="landbox">
+    <img src="/logo_transparent.png" alt="" class="logo">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+      irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  </div>
+<%end%>
 <% else %>
 
-<div class="main">
 <div class="headline">
   <div class="location">
     <div class="pickLocation">
@@ -96,7 +116,11 @@
     <!-- <button type="button" name="button">Join</button> -->
     <%= link_to "Join Random Event", random_event_path %>
   </div>
+
 </div>
+
+<!-- Location End  -->
+
 <% if @eat_area != nil %>
   <div class="yelpList">
     <% @yelp_response["businesses"].each do |b| %>
@@ -110,7 +134,11 @@
         <p>Price:
           <%= b["price"] %></p>
         <p>Rating:
-          <%= b["rating"] %></p>
+          <% if b["rating"] != nil %>
+          <% b["rating"].to_i.times do %>
+          <img class="star" src="https://png.pngtree.com/svg/20170626/star_rating_425874.png" size="20px">
+          <% end %>
+          <% end %>
         <p>Reviews:
           <%= @client.review(b["id"]).reviews[0].text %></p>
         <%= form_for @meetup do |m| %>
@@ -130,10 +158,10 @@
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
     irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-</div>
+  </div>
 
 <% end %>
-</div>
-</div>
 
+</div>
 <% end %>
+</div>
