@@ -3,6 +3,7 @@
 ![Logo](https://plate-onicly.herokuapp.com/logo_transparent.png)
 
 Plate-onicly.
+https://plate-onicly.herokuapp.com/
 
 Ruby 2.5.1
 
