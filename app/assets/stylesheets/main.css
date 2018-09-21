@@ -204,28 +204,12 @@ nav ul li a:hover {
 
 .popup {
   position: fixed;
-  top:25px;
+  top:10px
   width: 100vw;
   height: 100vh;
-  background:rgba(255,0,0,.3) ;
   z-index: 2;
   overflow: hidden;
   /* display: none; */
-}
-
-.signup {
-  width: 300px;
-  height: 90vh;
-  margin: 0 auto;
-  background: rgba(255,255,255, 0.9);
-  border: black 2px solid;
-  padding: 10px;
-  margin-top:25px;
-  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  box-sizing: content-box;
-  overflow: scroll;
-
 }
 
 .signup input, .login input{
@@ -253,14 +237,38 @@ nav ul li a:hover {
 }
 
 .userHome {
+  position: relative;
   width: 300px;
   height: 300px;
-  background: rgba(0,0,0,.8);
-  border-radius: 0 0 20px 0;
-  color: white;
-
-
+  background: white;
+  border-radius: 10px;
+  color: black;
+  margin: 10px 0 0 10px;
 }
+
+.userBtn {
+  position: relative;
+  height: 25px;
+  width: 60%;
+  font-size: 15px;
+  background: #4E403B;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-left: 20%;
+  outline: none;
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.7);
+}
+.userBtn:hover {
+  opacity: .8;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.7);
+  bottom: 2;
+}
+.userBtn:active {
+box-shadow: none;
+}
+
 .yelpList {
   float: right;
   position: relative;
@@ -275,7 +283,6 @@ nav ul li a:hover {
   overflow: scroll;
   border-top: black 2px solid;
   border-bottom: black 2px solid;
-
 }
 .yelp {
   height: auto;

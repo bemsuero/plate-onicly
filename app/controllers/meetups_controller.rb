@@ -8,6 +8,7 @@ class MeetupsController < ApplicationController
   before_action :current_meetup_slug, only: [:show, :directions]
 
   def new
+      @user = User.new
     if current_user == nil
       @eat_area = params[:eat_area]
       session[:location] = @eat_area
@@ -77,7 +78,7 @@ class MeetupsController < ApplicationController
   end
 
   def show
-        @meetup = Meetup.find_by(slug: params[:slug])
+    @meetup = Meetup.find_by(slug: params[:slug])
   end
 
   def random

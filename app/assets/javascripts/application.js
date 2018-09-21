@@ -16,9 +16,7 @@
 //= require activestorage
 //= require_tree .
 
-document.getElementById("meet_time").step = "30"
-document.getElementById("meet_time").min = "8:00"
-document.getElementById("meet_time").max = "20:00"
+
 $( document ).ready(function() {
     $('.popup').hide();
     $('.login').hide();
@@ -39,5 +37,7 @@ $( document ).ready(function() {
       $('.login').fadeOut(1000);
       $('.signup').fadeOut(1000);
     });
-
+    document.getElementById("meet_time").step = "30"
+    document.getElementById("meet_time").min = "8:00"
+    document.getElementById("meet_time").max = "20:00"
 });
