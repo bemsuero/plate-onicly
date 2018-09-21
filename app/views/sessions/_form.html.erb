@@ -1,0 +1,8 @@
+<h1 class="question">Log In</h1>
+<%= form_for(:session, url: sessions_new_path) do |f| %>
+<%= f.label 'Email'%><br>
+<%= f.email_field :email, placeholder: "Email", required: true %><br>
+<%= f.label 'Password'%><br>
+<%= f.password_field :password, placeholder: "Password", required: true %><br><br>
+<input type="submit" name="" value="Log in" class="form_button"><input type="" name="" value="close" class="form_button close">
+<% end %>

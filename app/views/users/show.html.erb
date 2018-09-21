@@ -1,33 +1,31 @@
 <div class="userHome">
 
   <% if logged_in? %>
-    <h2>Welcome
+    <h2 class="question">Welcome
       <%= @user.first_name %>
       <%= @user.last_name %>
-      User#:
-      <%= current_user.id %>
     </h2>
     <h3>Your Interests:</h3>
     <% @user.interests.each do |interest| %>
       <%= interest.name %><br>
     <% end %><br>
 
-    <%= link_to "Edit Information", edit_user_path %> <br>
+    <button class="userBtn"><%= link_to "Edit Information", edit_user_path %></button> <br>
 
     <% if @current_meetup == nil and @current_meetup_joined == nil %>
-      <%= link_to "Create Event", new_user_meetup_path(current_user) %>
+      <button class="userBtn"><%= link_to "Create Event", new_user_meetup_path(current_user) %></button>
       <br>
     <% end %>
     <% if @current_meetup == nil and @current_meetup_joined == nil %>
-      <%= link_to "Join Random Event", random_event_path %><br>
+      <button class="userBtn"><%= link_to "Join Random Event", random_event_path %></button><br>
     <% end %>
 
     <% if @current_meetup != nil %>
-      <%= link_to "Current Event", user_meetup_path(current_user) %><br>
-      <%= link_to "Cancel/End Event", cancel_event_path %><br>
+      <button class="userBtn"><%= link_to "Current Event", user_meetup_path(current_user) %></button><br>
+      <button class="userBtn"><%= link_to "Cancel/End Event", cancel_event_path %></button><br>
       <% elsif @current_meetup_joined != nil %>
-        <%= link_to "Current Event", user_meetup_path(current_user) %><br>
-        <%= link_to "Leave Event", leave_event_path %><br>
+        <button class="userBtn"><%= link_to "Current Event", user_meetup_path(current_user) %></button><br>
+        <button class="userBtn"><%= link_to "Leave Event", leave_event_path %></button><br>
       <% else %>
       <% end %>
 
@@ -35,5 +33,3 @@
       <h1>(You are not logged in)</h1>
     <% end %>
   </div>
-
-  <div class=""></div>

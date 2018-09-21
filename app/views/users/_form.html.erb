@@ -1,4 +1,4 @@
-<h1>Add a new user</h1>
+<h1 class="question">Add a new user</h1>
 <%= form_for(@user) do |f| %>
 <label>Email:</label><br>
 <%= f.email_field :email, placeholder: "Email", required: true %><br><br>
@@ -27,5 +27,6 @@
 <%= f.password_field :password, placeholder: "Password", required: true %><br><br>
 <label>Confirm Password:</label><br>
 <%= f.password_field :password_confirmation, placeholder: 'Confirm Password', required: true %><br><br>
-<%= f.submit "Register", class:'btn' %>
+
+<input type="submit" name="" value="Sign up" class="form_button"><input type="" name="" value="close" class="form_button close">
 <% end %>
