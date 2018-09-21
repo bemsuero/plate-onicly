@@ -1,6 +1,6 @@
 # README
 
-![alt text](/logo_transparent.png)
+![Logo](https://plate-onicly.herokuapp.com/logo_transparent.png)
 
 Plate-onicly.
 
