@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![alt text](/logo_transparent.png)
 
-Things you may want to cover:
+Plate-onicly.
 
-* Ruby version
+Ruby 2.5.1
 
-* System dependencies
+A random meetup for lunch web application. Created by John Frazier, Ibteda Sabur, Minji So, Bemilton Suero and Joseph Worman.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Login is not needed, meetups are randomly assigned, but you can create your own meetup. If you create an account you are also able to cancel/leave meetups.
