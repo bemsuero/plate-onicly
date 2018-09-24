@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create_guest
-    
+
   end
   def create
     @user = User.find_by(email: params[:session][:email].downcase)

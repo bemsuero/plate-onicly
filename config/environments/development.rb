@@ -52,7 +52,7 @@ Rails.application.configure do
   port:                 587,
   domain:               'plate-onicly.herokuapp.com',
   user_name:            'plateonicly',
-  password:             'Test7()123',
+  password:             ENV['EMAIL_PASSWORD'],
   authentication:       'plain',
   enable_starttls_auto: true  }
 
